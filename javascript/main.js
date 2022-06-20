@@ -1,6 +1,6 @@
 const URL_POKE = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-let pokeChart;    
+let pokeChart;
 
 let poke = async (id) => {
 
