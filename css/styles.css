@@ -14,6 +14,7 @@ h1{
     font-size: 10rem;
     font-weight: bold;
     color: rgb(86, 97, 139);
+    margin-bottom: 30px;
 }
 section{
     display: grid;
