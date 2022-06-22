@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es"/>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Api de Pokemon"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="keywords" content="api, pokemon, pikachu, charmander, charizar, greninsha"/>
+        <meta name="author" content="Federico Maidana"/>
+        <meta name="copyright" content="Federico Maidana"/>
+        <link rel="stylesheet" href="../css/styles.css"/>
+        <title>PokeApi - Pokemon</title>
+    </head>
+    <body>
+        <h1></h1>
+
+        <section>
+            <img src="../icons/arrow.png" class="arrow-left" id="arrow-left" alt="flecha izquierda"/>
+
+            <div class="container-poke">
+                <img id="img-poke"/>
+                <div class="types-poke">
+                    <div class="type-poke">
+                        <p id="type"></p>
+                    </div>
+                    <div class="second-type-poke">
+                        <p id="second-type"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="marcks-chart"></canvas>
+            </div>
+
+            <img src="../icons/arrow.png" class="arrow-right" id="arrow-right" alt="flecha derecha"/>
+        </section>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js" integrity="sha512-5m2r+g00HDHnhXQDbRLAfZBwPpPCaK+wPLV6lm8VQ+09ilGdHfXV7IVyKPkLOTfi4vTTUVJnz7ELs7cA87/GMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="../javascript/main.js"></script>
+    </body>
+</html>

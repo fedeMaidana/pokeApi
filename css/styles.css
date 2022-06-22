@@ -11,32 +11,73 @@ body{
 }
 h1{
     text-align: center;
-    font-size: 11rem;
+    font-size: 10rem;
     font-weight: bold;
     color: rgb(86, 97, 139);
 }
 section{
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr 4fr 1fr;
+    justify-items: center;
+    align-items: baseline;
+}
+.arrow-left{
+    width: 30%;
+    height: 10%;
+    cursor: pointer;
+    align-self: center;
+}
+.container-poke{
+    display: grid;
+    grid-template-rows: 5fr 1fr;
     justify-items: center;
     align-items: center;
 }
-.arrow-left{
-    width: 50px;
-    height: 45px;
-    cursor: pointer;
-}
 #img-poke{
-    width: 300px;
-    height: 300px;
+    width: 88.854%;
+    height: 100%;
 }
-div{
-    height: 400px;
-    width: 400px;
+.types-poke{
+    display: inherit;
+    grid-template-columns: 1fr;
+    width: 100%;
+    justify-items: center;
+}
+.type-poke{
+    display: inherit;
+    justify-items: center;
+    align-items: center;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+}
+.second-type-poke{
+    display: none;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    justify-items: center;
+    align-items: center;
+}
+.type-poke p{
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+.second-type-poke p{
+    display: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+.canvas-container{
+    height: 80%;/*400px*/
+    width: 80%;/*400px*/
 }
 .arrow-right{
-    width: 50px;
-    height: 45px;
+    width: 30%;
+    height: 10%;
     transform: rotate(180deg);
     cursor: pointer;
+    align-self: center;
 }
