@@ -1,4 +1,5 @@
 const URL_POKE = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
+const URL_POKE_SPECIES = (id) => `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
 let pokeChart;
 
@@ -6,8 +7,6 @@ let poke = async (id) => {
 
     let response = await fetch(URL_POKE(id));
     let data = await response.json();
-
-    console.log(data);
 
     let arrowL = document.getElementById('arrow-left');
     let arrowR = document.getElementById('arrow-right');
@@ -19,6 +18,7 @@ let poke = async (id) => {
     pokeImage(data.id);
     pokeType(data.id);
     pokeGraph(data.id);
+    pokeDescription(data.id);
 }
 
 let pokeName = async (id) => {
@@ -51,102 +51,128 @@ let pokeType = async (id) => {
     let secondType = document.getElementById('second-type');
 
     if(data.types.length == 2){
-        typesPoke[0].setAttribute('style', 'grid-template-columns: 1fr 1fr;')
+        typesPoke[0].setAttribute('style', 'grid-template-columns: 1fr 1fr;');
         secondTypePoke[0].style.display = 'grid';
-        secondType.setAttribute('style', 'display: grid')
+        secondType.setAttribute('style', 'display: grid');
     }else{
-        typesPoke[0].setAttribute('style', 'grid-template-columns: 1fr;')
+        typesPoke[0].setAttribute('style', 'grid-template-columns: 1fr;');
         secondTypePoke[0].style.display = 'none';
-        secondType.setAttribute('style', 'display: none')
+        secondType.setAttribute('style', 'display: none');
     }
 
     let color;
     let text;
+    let l;
 
-    for(let i = 0; i < 2; i++){
+    if(data.types.length == 1){
+        l = 1;
+    }else{
+        l = 2;
+    }
 
-    switch(data.types[i].type.name) {
-        case "normal":
-            color = 'rgb(164, 172, 175)';
-            text = "Normal";
+    for(let i = 0; i < l; i++){
+
+        switch(data.types[i].type.name) {
+            case "normal":
+                color = 'rgba(164, 172, 175, .5)';
+                text = "Normal";
             break;
-        case "fighting":
-            color = 'rgb(213, 103, 35)';
-            text = "Lucha";
+
+            case "fighting":
+                color = 'rgb(213, 103, 35)';
+                text = "Lucha";
             break;
-        case "flying":
-            color = 'rgb(61, 199, 239)';
-            text = "Volador";
+
+            case "flying":
+                color = 'rgb(114, 217, 247)';
+                text = "Volador";
             break;
-        case "poison":
-            color = 'rgb(185, 127, 201)';
-            text = "Veneno";
+
+            case "poison":
+                color = 'rgb(185, 127, 201)';
+                text = "Veneno";
             break;
-        case "ground":
-            color = 'rgb(171, 152, 66)';
-            text = "Tierra";
+
+            case "ground":
+                color = 'rgb(171, 152, 66)';
+                text = "Tierra";
             break;
-        case "rock":
-            color = 'rgb(163, 140, 33)';
-            text = "Roca";
+
+            case "rock":
+                color = 'rgb(163, 140, 33)';
+                text = "Roca";
             break;
-        case "bug":
-            color = 'rgb(114, 159, 63)';
-            text = "Bicho";
+
+            case "bug":
+                color = 'rgb(114, 159, 63)';
+                text = "Bicho";
             break;
-        case "ghost":
-            color = 'rgb(123, 98, 163)';
-            text = "Fantasma";
+
+            case "ghost":
+                color = 'rgb(123, 98, 163)';
+                text = "Fantasma";
             break;
-        case "steel":
-            color = 'rgb(158, 183, 184)';
-            text = "Acero";
+
+            case "steel":
+                color = 'rgb(158, 183, 184)';
+                text = "Acero";
             break;
-        case "fire":
-            color = 'rgb(253, 125, 36)';
-            text = "Fuego";
+
+            case "fire":
+                color = 'rgb(253, 125, 36)';
+                text = "Fuego";
             break;
-        case "water":
-            color = 'rgb(69, 146, 196)';
-            text = "Agua";
+
+            case "water":
+                color = 'rgb(69, 146, 196)';
+                text = "Agua";
             break;
-        case "grass":
-            color = 'rgb(155, 204, 80)';
-            text = "Planta";
+
+            case "grass":
+                color = 'rgb(155, 204, 80)';
+                text = "Planta";
             break;
-        case "electric":
-            color = 'rgb(238, 213, 53)';
-            text = "Eléctrico";
+
+            case "electric":
+                color = 'rgb(238, 213, 53)';
+                text = "Eléctrico";
             break;
-        case "psychic":
-            color = 'rgb(243, 102, 185)';
-            text = "Psíquico";
+
+            case "psychic":
+                color = 'rgb(243, 102, 185)';
+                text = "Psíquico";
             break;
-        case "ice":
-            color = 'rgb(81, 196, 231)';
-            text = "Hielo";
+
+            case "ice":
+                color = 'rgb(81, 196, 231)';
+                text = "Hielo";
             break;
-        case "dragon":
-            color = 'rgb(241, 110, 87)';
-            text = "Dragón";
+
+            case "dragon":
+                color = 'rgb(241, 110, 87)';
+                text = "Dragón";
             break;
-        case "dark":
-            color = 'rgb(112, 112, 112)';
-            text = "Siniestro";
+
+            case "dark":
+                color = 'rgb(112, 112, 112)';
+                text = "Siniestro";
             break;
-        case "fairy":
-            color = 'rgb(253, 185, 233)';
-            text = "Hada";
+
+            case "fairy":
+                color = 'rgb(253, 185, 233)';
+                text = "Hada";
             break;
         }
 
         if(i == 0){
             typePoke[0].style.backgroundColor = color;
+            typePoke[0].style.border = `1px solid`;
             type.innerHTML = text;
         }
 
         if(data.types.length == 2){
             secondTypePoke[0].style.backgroundColor = color;
+            secondTypePoke[0].style.border = `1px solid`;
             secondType.innerHTML = text;
         }
     }
@@ -191,13 +217,18 @@ let pokeGraph = async (id) => {
                     },
                     ticks: {
                         stepSize: 20,
-                        display: false,
+                        display: false
                     },
                     grid: {
                         color: 'rgba(122, 198, 12, .4)'
                     },
                     pointLabels: {
-                        color: 'rgb(0, 0, 0)'
+                        color: 'rgb(0, 0, 0)',
+                        font: {
+                            family: 'Times New Roman',
+                            size: 13,
+                            weight: 'bold'
+                        },
                     },
                     suggestedMin: 0,
                     suggestedMax: 100,
@@ -217,6 +248,20 @@ let arrowRight = async (id) => {
 
     poke(id += 1);
     pokeGraph(id += 1);
+}
+
+let pokeDescription = async (id) => {
+    let response = await fetch(URL_POKE_SPECIES(id));
+    let data = await response.json();
+
+    console.log(data);
+
+    let description = document.getElementById('description');
+    let containerDescription = document.getElementsByClassName('container-info-2');
+
+    let index = data.flavor_text_entries.findIndex(info => info.language.name === 'es');
+
+    description.innerHTML = data.flavor_text_entries[index].flavor_text;
 }
 
 let pokeRandom = async () => {

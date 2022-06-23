@@ -15,8 +15,9 @@ h1{
     font-weight: bold;
     color: rgb(86, 97, 139);
     margin-bottom: 30px;
+    text-shadow: -1px 0 rgb(59, 66, 94), 0 1px rgb(59, 66, 94), 1px 0 rgb(59, 66, 94), 0 -1px rgb(59, 66, 94);
 }
-section{
+.container-info-1{
     display: grid;
     grid-template-columns: 1fr 3fr 4fr 1fr;
     justify-items: center;
@@ -81,4 +82,21 @@ section{
     transform: rotate(180deg);
     cursor: pointer;
     align-self: center;
+}
+.container-info-2{
+    display: grid;
+    width: 50vw;
+    height: 10vh;
+    background-color: rgb(100, 178, 209);
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 10px;
+}
+.container-info-2 p{
+    font-size: 1.6rem;
+    font-family: 'Times New Roman', Times, serif;
 }
