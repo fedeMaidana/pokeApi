@@ -1,24 +1,28 @@
-const URL_POKE = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
-const URL_POKE_SPECIES = (id) => `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+const URL_POKE = (id) => `https://pokeapi.co/api/v2/pokemon/${id}/`;
+const URL_POKE_SPECIES = (id) => `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
+const URL_POKE_GENDER_FEMALE = `https://pokeapi.co/api/v2/gender/1/`;
+const URL_POKE_GENDER_MALE = `https://pokeapi.co/api/v2/gender/2/`;
+const URL_POKE_GENDERLESS = `https://pokeapi.co/api/v2/gender/3/`;
 
 let pokeChart;
 
 let poke = async (id) => {
-
     let response = await fetch(URL_POKE(id));
     let data = await response.json();
 
-    let arrowL = document.getElementById('arrow-left');
-    let arrowR = document.getElementById('arrow-right');
-
-    arrowL.onclick = () => arrowLeft(data.id);
-    arrowR.onclick = () => arrowRight(data.id);
+    let arrowL = document.getElementById('arrow-left').onclick = () => arrowLeft(data.id);
+    let arrowR = document.getElementById('arrow-right').onclick = () => arrowRight(data.id);
 
     pokeName(data.id);
     pokeImage(data.id);
     pokeType(data.id);
     pokeGraph(data.id);
     pokeDescription(data.id);
+    pokeHeight(data.id);
+    pokeWeight(data.id);
+    pokeSex(data.name);
+    pokeCategory(data.id);
+    pokeAbility(data.id);
 }
 
 let pokeName = async (id) => {
@@ -27,16 +31,15 @@ let pokeName = async (id) => {
 
     let h1 = document.querySelector('h1');
 
-    h1.innerHTML = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)} N.°${data.id.toString().padStart(3, 0)}`;
+    h1.innerHTML = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)} N.°${data.id.toString().padStart(3, 0)}`
 }
 
 let pokeImage = async (id) => {
     let response = await fetch(URL_POKE(id));
     let data = await response.json();
 
-    let img = document.getElementById('img-poke');
+    let img = document.getElementById('img-poke').src = data.sprites.other["official-artwork"].front_default;
 
-    img.src = data.sprites.other["official-artwork"].front_default;
     img.alt = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
 }
 
@@ -254,14 +257,191 @@ let pokeDescription = async (id) => {
     let response = await fetch(URL_POKE_SPECIES(id));
     let data = await response.json();
 
-    console.log(data);
-
     let description = document.getElementById('description');
-    let containerDescription = document.getElementsByClassName('container-info-2');
-
     let index = data.flavor_text_entries.findIndex(info => info.language.name === 'es');
 
     description.innerHTML = data.flavor_text_entries[index].flavor_text;
+}
+
+let pokeHeight = async (id) => {
+    let response = await fetch(URL_POKE(id));
+    let data = await response.json();
+
+    let height = document.getElementById('height').innerHTML = `${data.height / 10} m`;
+}
+
+let pokeWeight = async (id) => {
+    let response = await fetch(URL_POKE(id));
+    let data = await response.json();
+
+    let weight = document.getElementById('weight').innerHTML = `${data.weight / 10} Kg`;
+}
+
+let pokeSex = async (name) => {
+    let responseFemale = await fetch(URL_POKE_GENDER_FEMALE);
+    let dataFemale = await responseFemale.json();
+    let responseMale = await fetch(URL_POKE_GENDER_MALE);
+    let dataMale = await responseMale.json();
+    let responseGenderless = await fetch(URL_POKE_GENDERLESS);
+    let dataGenderless = await responseGenderless.json();
+
+    let indexFemale = dataFemale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+    let indexMale = dataMale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+    let indexGenderless = dataGenderless.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+
+    let sex = document.getElementById('sex');
+    let icon1 = document.getElementById('icon1');
+    let icon2 = document.getElementById('icon2');
+    let icon3 = document.getElementById('icon3');
+    let unknown = document.getElementById('unknown');
+
+    sex.appendChild(unknown);
+
+    icon1.style.display = 'inline';
+    icon2.style.display = 'inline';
+    icon3.style.display = 'inline';
+
+    if(indexMale == -1){
+        icon2.src = '../icons/female.svg';
+        icon1.style.display = 'none';
+        icon3.style.display = 'none';
+        unknown.style.display = 'none';
+        sex.style.gridTemplateColumns = '1fr';
+    }else{
+        icon1.src = '../icons/male.svg';
+        icon2.src = '../icons/female.svg';
+        icon3.style.display = 'none';
+        unknown.style.display = 'none';
+    }
+
+    if(indexFemale == -1){
+        icon1.src = '../icons/male.svg';
+        icon2.style.display = 'none';
+        icon3.style.display = 'none';
+        unknown.style.display = 'none';
+        sex.style.gridTemplateColumns = '1fr';
+    }else{
+        icon1.src = '../icons/male.svg';
+        icon2.src = '../icons/female.svg';
+        icon3.style.display = 'none';
+        unknown.style.display = 'none';
+    }
+
+    if(indexGenderless != -1){
+        icon3.style.display = 'inline';
+        icon3.src = '../icons/genderless.svg';
+        icon1.style.display = 'none';
+        icon2.style.display = 'none';
+        unknown.style.display = 'none';
+        sex.style.gridTemplateColumns = '1fr';
+    }
+
+    if(indexFemale == -1 && indexMale == -1 && indexGenderless == -1){
+        unknown.style.display = 'inline';
+        icon1.style.display = 'none';
+        icon2.style.display = 'none';
+        icon3.style.display = 'none';
+        unknown.innerHTML = '???';
+        sex.style.gridTemplateColumns = '1fr';
+    }
+}
+
+let pokeCategory = async (id) => {
+    let response = await fetch(URL_POKE_SPECIES(id));
+    let data = await response.json();
+
+    let category = document.getElementById('category');
+
+    let index = data.genera.findIndex(info => info.language.name === 'es');
+
+    let string = data.genera[index].genus;
+    let newString;
+
+    if(string.includes('Pokémon')){
+        newString = string.slice(8);
+    }
+
+    category.innerHTML = newString;
+}
+
+let pokeAbility = async (id) => {
+    let response = await fetch(URL_POKE(id));
+    let data = await response.json();
+
+    console.log(data.abilities.length);
+
+    let url1, url2, url3;
+
+    if(data.abilities.length == 3){
+        url1 = data.abilities[0].ability.url;
+        url2 = data.abilities[1].ability.url;
+        url3 = data.abilities[2].ability.url;
+    }else if(data.abilities.length == 2){
+        url1 = data.abilities[0].ability.url;
+        url2 = data.abilities[1].ability.url;
+    }else if(data.abilities.length == 1){
+        url1 = data.abilities[0].ability.url;
+    }
+
+    let responseUrl1, dataUrl1, responseUrl2, dataUrl2, responseUrl3, dataUrl3;
+
+    if(data.abilities.length == 3){
+        responseUrl1 = await fetch(url1);
+        dataUrl1 = await responseUrl1.json();
+        responseUrl2 = await fetch(url2);
+        dataUrl2 = await responseUrl2.json();
+        responseUrl3 = await fetch(url3);
+        dataUrl3 = await responseUrl3.json();
+    }else if(data.abilities.length == 2){
+        responseUrl1 = await fetch(url1);
+        dataUrl1 = await responseUrl1.json();
+        responseUrl2 = await fetch(url2);
+        dataUrl2 = await responseUrl2.json();
+    }else if(data.abilities.length == 1){
+        responseUrl1 = await fetch(url1);
+        dataUrl1 = await responseUrl1.json();
+    }
+
+    let indexUrl1, indexUrl2, indexUrl3;
+
+    if(data.abilities.length == 3){
+        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
+        indexUrl2 = dataUrl2.names.findIndex(info => info.language.name === 'es');
+        indexUrl3 = dataUrl3.names.findIndex(info => info.language.name === 'es');
+    }else if(data.abilities.length == 2){
+        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
+        indexUrl2 = dataUrl2.names.findIndex(info => info.language.name === 'es');
+    }else if(data.abilities.length == 1){
+        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
+    }
+
+    let abilityClass = document.getElementById('ability-container');
+    let ability = document.getElementById('ability');
+    let pokeAbility1 = document.getElementById('ability1');
+    let pokeAbility2 = document.getElementById('ability2');
+    let pokeAbility3 = document.getElementById('ability3');
+
+    ability.appendChild(pokeAbility1);
+    ability.appendChild(pokeAbility2);
+    ability.appendChild(pokeAbility3);
+
+    if(data.abilities.length == 3){
+        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
+        pokeAbility2.innerHTML = dataUrl2.names[indexUrl2].name;
+        pokeAbility3.innerHTML = dataUrl3.names[indexUrl3].name;
+    }else if(data.abilities.length == 2){
+        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
+        pokeAbility2.innerHTML = dataUrl2.names[indexUrl2].name;
+        pokeAbility3.style.display = 'none';
+        ability.style.gridTemplateColumns = '1fr 1fr';
+        abilityClass.style.width = '33vw';
+    }else if(data.abilities.length == 1){
+        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
+        pokeAbility2.style.display = 'none';
+        pokeAbility3.style.display = 'none';
+        ability.style.gridTemplateColumns = '1fr';
+        abilityClass.style.width = '20vw';
+    }
 }
 
 let pokeRandom = async () => {
