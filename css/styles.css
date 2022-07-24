@@ -73,8 +73,9 @@ h1 {
     font-family: 'Times New Roman', Times, serif;
 }
 .canvas-container {
-    height: 80%;
-    width: 80%;
+    height: 60%;
+    width: 60%;
+    padding-top: 40px;
 }
 .arrow-right {
     width: 30%;
@@ -163,6 +164,9 @@ h1 {
     width: 20px;
     height: 20px;
 }
+#sex p{
+    font-weight: 400;
+}
 .extra-info .category {
     background-color: rgb(119, 185, 211);
     grid-area: 2 / 2 / 3 / 3;
@@ -183,6 +187,8 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 10px;
+    height: 80%;
+    align-items: center;
 }
 .extra-info #ability-container span p {
     cursor: pointer;
@@ -194,12 +200,50 @@ h1 {
     font-weight: 400;
     font-size: 1.8rem;
 }
-.resistan-weak {
+.endurance-weakness {
     display: inherit;
     width: auto;
     height: auto;
-    background-color: rgb(188, 204, 98);
+    background-color: rgb(36, 38, 39);
     border-radius: 10px;
     grid-area: 2 / 1 / 3 / 2;
     margin: 0 0 20px 20px;
+    grid-template-columns: 1fr 1fr;
+}
+.endurance{
+    background-color: rgb(134, 211, 119);
+    clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.weakness-container{
+    background-color: rgb(211, 119, 162);
+    clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 0% 100%);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: grid;
+    grid-template: 1fr 4fr / 1fr;
+}
+.weakness-container .title-container {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.weakness-container .title-container h3 {
+    font-size: 1.8rem;
+}
+#types-container{
+    display: inherit;
+}
+#w-type-1, #w-type-2, #w-type-3, #w-type-4, #w-type-5, #w-type-6, #w-type-7{
+    display: none;
+    width: 75px;
+    height: 30px;
+    border-radius: 30px;
+    justify-self: center;
+    border: 1px solid;
+}
+#w-text-1, #w-text-2, #w-text-3, #w-text-4, #w-text-5, #w-text-6, #w-text-7{
+    display: inherit;
+    align-self: center;
+    font-size: 1.4rem;
 }
