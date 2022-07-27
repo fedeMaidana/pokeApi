@@ -27,6 +27,7 @@ let poke = async (id) => {
     pokeSex(data.name);
     pokeCategory(data.id);
     pokeAbility(data.id);
+    pokeEndurance(data.id);
     pokeWeakness(data.id);
 }
 
@@ -536,6 +537,395 @@ let pokeAbility = async (id) => {
     }
 }
 
+let pokeEndurance = async (id) => {
+    let response = await fetch(URL_POKE(id));
+    let data = await response.json();
+
+    let typeUrl1, typeUrl2;
+
+    if(data.types.length == 1){
+        typeUrl1 = data.types[0].type.url;
+    }else if(data.types.length == 2){
+        typeUrl1 = data.types[0].type.url;
+        typeUrl2 = data.types[1].type.url;
+    }
+
+    let responseUrl1, dataUrl1, responseUrl2, dataUrl2;
+
+    let weakness1, weakness2, resistance1, resistance2;
+
+    if(data.types.length == 1){
+        responseUrl1 = await fetch(typeUrl1);
+        dataUrl1 = await responseUrl1.json();
+
+        resistance1 = dataUrl1.damage_relations.half_damage_from;
+        weakness1 = dataUrl1.damage_relations.double_damage_from;
+
+    }else if(data.types.length == 2){
+        responseUrl1 = await fetch(typeUrl1);
+        dataUrl1 = await responseUrl1.json();
+
+        responseUrl2 = await fetch(typeUrl2);
+        dataUrl2 = await responseUrl2.json();
+
+        weakness1 = dataUrl1.damage_relations.double_damage_from;
+        weakness2 = dataUrl2.damage_relations.double_damage_from;
+        resistance1 = dataUrl1.damage_relations.half_damage_from;
+        resistance2 = dataUrl2.damage_relations.half_damage_from;
+    }
+
+    let wt1, wt2, rt1, rt2, pos, countR1 = 0, countR2 = 0;
+
+    let enduranceContainer = document.getElementById('e-c');
+    let typesContainer = document.getElementById('types-e-container');
+    let type1 = document.getElementById('e-type-1');
+    let text1 = document.getElementById('e-text-1');
+    let type2 = document.getElementById('e-type-2');
+    let text2 = document.getElementById('e-text-2');
+    let type3 = document.getElementById('e-type-3');
+    let text3 = document.getElementById('e-text-3');
+    let type4 = document.getElementById('e-type-4');
+    let text4 = document.getElementById('e-text-4');
+    let type5 = document.getElementById('e-type-5');
+    let text5 = document.getElementById('e-text-5');
+    let type6 = document.getElementById('e-type-6');
+    let text6 = document.getElementById('e-text-6');
+    let type7 = document.getElementById('e-type-7');
+    let text7 = document.getElementById('e-text-7');
+    let type8 = document.getElementById('e-type-8');
+    let text8 = document.getElementById('e-text-8');
+    let type9 = document.getElementById('e-type-9');
+    let text9 = document.getElementById('e-text-9');
+    let type10 = document.getElementById('e-type-10');
+    let text10 = document.getElementById('e-text-10');
+    let type11 = document.getElementById('e-type-11');
+    let text11 = document.getElementById('e-text-11');
+
+    if(data.types.length == 1){
+        rt1 = resistance1.slice();
+
+        let position;
+
+        let urlType = async (x) => {
+            let responseType = await fetch(URL_POKE_TYPES(x));
+            let dataType = await responseType.json();
+
+            return dataType;
+        };
+
+        if(data.types[0].type.name == 'normal'){
+            typesContainer.style.gridTemplate = '1fr / 1fr';
+            type1.style.display = 'grid';
+            type1.style.alignSelf = 'center';
+            type1.style.border = 'none';
+
+            text1.innerHTML = 'n/a';
+        }
+
+        rt1.forEach(async(element, i) => {
+            let dataType = await urlType(element.name);
+
+            console.log(rt1);
+
+            if(rt1.length == 1){
+                typesContainer.style.gridTemplate = '1fr / 1fr';
+                type1.style.display = 'grid';
+                type1.style.alignSelf = 'center';
+
+                type1.style.backgroundColor = pokeTypeColor(element.name);
+
+                position = dataType.names.findIndex(info => info.language.name === 'es');
+                text1.innerHTML = dataType.names[position].name;
+            }else if(rt1.length == 2){
+                typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+            }else if(rt1.length == 3){
+                typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+                eType3(dataType, type3, text3, i, element);
+                type3.style.alignSelf = 'center';
+            }else if(rt1.length == 4){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+                eType3(dataType, type3, text3, i, element);
+                type3.style.alignSelf = 'center';
+                eType4(dataType, type4, text4, i, element);
+                type4.style.alignSelf = 'center';
+            }else if(rt1.length == 5){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+                eType3(dataType, type3, text3, i, element);
+                type3.style.alignSelf = 'center';
+                eType4_5(dataType, type4, text4, i, element);
+                type4.style.alignSelf = 'center';
+                eType5(dataType, type5, text5, i, element);
+                type5.style.alignSelf = 'center';
+            }else if(rt1.length == 6){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+                eType3(dataType, type3, text3, i, element);
+                type3.style.alignSelf = 'center';
+                eType4_4(dataType, type4, text4, i, element);
+                type4.style.alignSelf = 'center';
+                eType5_5(dataType, type5, text5, i, element);
+                type5.style.alignSelf = 'center';
+                eType6_6(dataType, type6, text6, i, element);
+                type6.style.alignSelf = 'center';
+            }else if(rt1.length == 10){
+                enduranceContainer.style.paddingBottom = '5px';
+                typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+                typesContainer.style.rowGap = '5px';
+
+                eType1(dataType, type1, text1, i, element);
+                type1.style.alignSelf = 'center';
+                eType2(dataType, type2, text2, i, element);
+                type2.style.alignSelf = 'center';
+                eType3(dataType, type3, text3, i, element);
+                type3.style.alignSelf = 'center';
+                eType4_10(dataType, type4, text4, i, element);
+                type4.style.alignSelf = 'center';
+                eType5_10(dataType, type5, text5, i, element);
+                type5.style.alignSelf = 'center';
+                eType6_10(dataType, type6, text6, i, element);
+                type6.style.alignSelf = 'center';
+                eType7(dataType, type7, text7, i, element);
+                type7.style.alignSelf = 'center';
+                eType8(dataType, type8, text8, i, element);
+                type8.style.alignSelf = 'center';
+                eType9(dataType, type9, text9, i, element);
+                type9.style.alignSelf = 'center';
+                eType10(dataType, type10, text10, i, element);
+                type10.style.alignSelf = 'center';
+            }
+        });
+
+    }else if(data.types.length == 2){
+        wt1 = weakness1.slice();
+        wt2 = weakness2.slice();
+        rt1 = resistance1.slice();
+        rt2 = resistance2.slice();
+
+        rt1.forEach(elementRT1 => {
+            wt2.forEach(elementWT2 => {
+                if(elementRT1.name == elementWT2.name){
+                    countR1 += 1;
+                }
+            });
+        });
+
+        for(let i = 0; i < countR1; i++){
+            rt1.forEach(elementRT1 => {
+                wt2.forEach(elementWT2 => {
+                    if(elementRT1.name == elementWT2.name){
+                        pos = rt1.findIndex(element => element.name == elementRT1.name);
+                        rt1.splice(pos, 1);
+                    }
+                });
+            });
+        }
+
+        dataUrl1.damage_relations.no_damage_from.forEach(element => {
+            let name = element.name;
+
+            rt2.forEach(elementRT2 => {
+                if(elementRT2.name == name){
+                    pos = rt2.findIndex(element => element.name == elementRT2.name);
+                    rt2.splice(pos, 1);
+                }
+            });
+        });
+
+        rt2.forEach(elementRT2 => {
+            wt1.forEach(elementWT1 => {
+                if(elementRT2.name == elementWT1.name){
+                    countR2 += 1;
+                }
+            });
+        });
+
+        for(let i = 0; i < countR2; i++){
+            rt2.forEach(elementRT2 => {
+                wt1.forEach(elementWT1 => {
+                    if(elementRT2.name == elementWT1.name){
+                        pos = rt2.findIndex(element => element.name == elementRT2.name);
+                        rt2.splice(pos, 1);
+                    }
+                });
+            });
+        }
+
+        dataUrl2.damage_relations.no_damage_from.forEach(element => {
+            let name = element.name;
+
+            rt1.forEach(elementRT1 => {
+                if(elementRT1.name == name){
+                    pos = rt1.findIndex(element => element.name == elementRT1.name);
+                    rt1.splice(pos, 1);
+                }
+            });
+        });
+
+        enduranceAll = rt1.concat(rt2);
+
+        let uniqs = enduranceAll.slice();
+
+        enduranceAll.forEach(element1 => {
+            let count = 0;
+
+            uniqs.forEach(element2 => {
+                if(element1.name == element2.name){
+                    count += 1;
+
+                    if(count == 2){
+                        pos = uniqs.findIndex(element => element.name == element1.name);
+                        uniqs.splice(pos, 1);
+                    }
+                }
+            });
+        });
+
+        let position;
+
+        let urlType = async (x) => {
+            let responseType = await fetch(URL_POKE_TYPES(x));
+            let dataType = await responseType.json();
+
+            return dataType;
+        };
+
+        uniqs.forEach(async(element, i) => {
+            let data = await urlType(element.name);
+
+            typesContainer.style.alignItems = 'center';
+
+            if(uniqs.length == 1){
+                typesContainer.style.gridTemplate = '1fr / 1fr';
+                type1.style.display = 'grid';
+
+                type1.style.backgroundColor = pokeTypeColor(element.name);
+
+                position = data.names.findIndex(info => info.language.name === 'es');
+                text1.innerHTML = data.names[position].name;
+            }else if(uniqs.length == 2){
+                typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+            }else if(uniqs.length == 3){
+                typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+            }else if(uniqs.length == 4){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4(data, type4, text4, i, element);
+            }else if(uniqs.length == 5){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_5(data, type4, text4, i, element);
+                wType5(data, type5, text5, i, element);
+            }else if(uniqs.length == 6){
+                typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_4(data, type4, text4, i, element);
+                wType5_5(data, type5, text5, i, element);
+                wType6_6(data, type6, text6, i, element);
+            }else if(uniqs.length == 7){
+                typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_7(data, type4, text4, i, element);
+                wType5_7(data, type5, text5, i, element);
+                wType6(data, type6, text6, i, element);
+                wType7(data, type7, text7, i, element);
+            }else if(uniqs.length == 8){
+                typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_7(data, type4, text4, i, element);
+                wType5_7(data, type5, text5, i, element);
+                wType6(data, type6, text6, i, element);
+                wType7(data, type7, text7, i, element);
+                wType8(data, type8, text8, i, element);
+            }else if(uniqs.length == 9){
+                typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_7(data, type4, text4, i, element);
+                wType5_7(data, type5, text5, i, element);
+                wType6(data, type6, text6, i, element);
+                wType7(data, type7, text7, i, element);
+                wType8(data, type8, text8, i, element);
+                wType9(data, type9, text9, i, element);
+            }else if(uniqs.length == 10){
+                typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_7(data, type4, text4, i, element);
+                wType5_7(data, type5, text5, i, element);
+                wType6(data, type6, text6, i, element);
+                wType7(data, type7, text7, i, element);
+                wType8(data, type8, text8, i, element);
+                wType9(data, type9, text9, i, element);
+                wType10(data, type10, text10, i, element);
+            }else if(uniqs.length == 11){
+                typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+
+                wType1(data, type1, text1, i, element);
+                wType2(data, type2, text2, i, element);
+                wType3(data, type3, text3, i, element);
+                wType4_7(data, type4, text4, i, element);
+                wType5_7(data, type5, text5, i, element);
+                wType6(data, type6, text6, i, element);
+                wType7(data, type7, text7, i, element);
+                wType8(data, type8, text8, i, element);
+                wType9(data, type9, text9, i, element);
+                wType10(data, type10, text10, i, element);
+                wType11(data, type11, text11, i, element);
+            }
+        });
+    }
+}
+
 let pokeWeakness = async (id) => {
     let response = await fetch(URL_POKE(id));
     let data = await response.json();
@@ -575,7 +965,7 @@ let pokeWeakness = async (id) => {
 
     let wt1, wt2, rt1, rt2, pos, countW1 = 0, countW2 = 0;
 
-    let typesContainer = document.getElementById('types-container');
+    let typesContainer = document.getElementById('types-w-container');
     let type1 = document.getElementById('w-type-1');
     let text1 = document.getElementById('w-text-1');
     let type2 = document.getElementById('w-type-2');
