@@ -5,17 +5,23 @@ const URL_POKE_GENDER_MALE = `https://pokeapi.co/api/v2/gender/2/`;
 const URL_POKE_GENDERLESS = `https://pokeapi.co/api/v2/gender/3/`;
 const URL_POKE_TYPES = (name) => `https://pokeapi.co/api/v2/type/${name}`;
 
-let pokeChart;
+let pokeChart, randomN;
+
+//document.getElementById('arrow-left').addEventListener("click", arrowLeft);
+//document.getElementById('arrow-right').addEventListener("click", arrowRight);
+
+document.getElementById('arrow-left').onclick = () => {
+    randomN -= 1;
+    poke(randomN);
+};
+document.getElementById('arrow-right').onclick = () =>{
+    randomN += 1
+    poke(randomN);
+};
 
 let poke = async (id) => {
     let response = await fetch(URL_POKE(id));
     let data = await response.json();
-
-    let arrowL = document.getElementById('arrow-left')
-        .onclick = () => arrowLeft(data.id);
-
-    let arrowR = document.getElementById('arrow-right')
-        .onclick = () => arrowRight(data.id);
 
     pokeName(data.id);
     pokeImage(data.id);
@@ -325,18 +331,6 @@ let pokeGraph = async (id) => {
     });
 }
 
-let arrowLeft = async (id) => {
-
-    poke(id -= 1);
-    pokeGraph(id -= 1);
-}
-
-let arrowRight = async (id) => {
-
-    poke(id += 1);
-    pokeGraph(id += 1);
-}
-
 let pokeDescription = async (id) => {
     let response = await fetch(URL_POKE_SPECIES(id));
     let data = await response.json();
@@ -625,8 +619,6 @@ let pokeEndurance = async (id) => {
         rt1.forEach(async(element, i) => {
             let dataType = await urlType(element.name);
 
-            console.log(rt1);
-
             if(rt1.length == 1){
                 typesContainer.style.gridTemplate = '1fr / 1fr';
                 type1.style.display = 'grid';
@@ -829,98 +821,98 @@ let pokeEndurance = async (id) => {
             }else if(uniqs.length == 2){
                 typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
             }else if(uniqs.length == 3){
                 typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
             }else if(uniqs.length == 4){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4(data, type4, text4, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4(data, type4, text4, i, element);
             }else if(uniqs.length == 5){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_5(data, type4, text4, i, element);
-                wType5(data, type5, text5, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_5(data, type4, text4, i, element);
+                eType5(data, type5, text5, i, element);
             }else if(uniqs.length == 6){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_4(data, type4, text4, i, element);
-                wType5_5(data, type5, text5, i, element);
-                wType6_6(data, type6, text6, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_4(data, type4, text4, i, element);
+                eType5_5(data, type5, text5, i, element);
+                eType6_6(data, type6, text6, i, element);
             }else if(uniqs.length == 7){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_7(data, type4, text4, i, element);
-                wType5_7(data, type5, text5, i, element);
-                wType6(data, type6, text6, i, element);
-                wType7(data, type7, text7, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_7(data, type4, text4, i, element);
+                eType5_7(data, type5, text5, i, element);
+                eType6(data, type6, text6, i, element);
+                eType7_7(data, type7, text7, i, element);
             }else if(uniqs.length == 8){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_7(data, type4, text4, i, element);
-                wType5_7(data, type5, text5, i, element);
-                wType6(data, type6, text6, i, element);
-                wType7(data, type7, text7, i, element);
-                wType8(data, type8, text8, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_9(data, type4, text4, i, element);
+                eType5_9(data, type5, text5, i, element);
+                eType6(data, type6, text6, i, element);
+                eType7_8(data, type7, text7, i, element);
+                eType8_8(data, type8, text8, i, element);
             }else if(uniqs.length == 9){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_7(data, type4, text4, i, element);
-                wType5_7(data, type5, text5, i, element);
-                wType6(data, type6, text6, i, element);
-                wType7(data, type7, text7, i, element);
-                wType8(data, type8, text8, i, element);
-                wType9(data, type9, text9, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_9(data, type4, text4, i, element);
+                eType5_9(data, type5, text5, i, element);
+                eType6_9(data, type6, text6, i, element);
+                eType7(data, type7, text7, i, element);
+                eType8(data, type8, text8, i, element);
+                eType9(data, type9, text9, i, element);
             }else if(uniqs.length == 10){
                 typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_7(data, type4, text4, i, element);
-                wType5_7(data, type5, text5, i, element);
-                wType6(data, type6, text6, i, element);
-                wType7(data, type7, text7, i, element);
-                wType8(data, type8, text8, i, element);
-                wType9(data, type9, text9, i, element);
-                wType10(data, type10, text10, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_10(data, type4, text4, i, element);
+                eType5_10(data, type5, text5, i, element);
+                eType6_10(data, type6, text6, i, element);
+                eType7(data, type7, text7, i, element);
+                eType8(data, type8, text8, i, element);
+                eType9(data, type9, text9, i, element);
+                eType10_10(data, type10, text10, i, element);
             }else if(uniqs.length == 11){
                 typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
 
-                wType1(data, type1, text1, i, element);
-                wType2(data, type2, text2, i, element);
-                wType3(data, type3, text3, i, element);
-                wType4_7(data, type4, text4, i, element);
-                wType5_7(data, type5, text5, i, element);
-                wType6(data, type6, text6, i, element);
-                wType7(data, type7, text7, i, element);
-                wType8(data, type8, text8, i, element);
-                wType9(data, type9, text9, i, element);
-                wType10(data, type10, text10, i, element);
-                wType11(data, type11, text11, i, element);
+                eType1(data, type1, text1, i, element);
+                eType2(data, type2, text2, i, element);
+                eType3(data, type3, text3, i, element);
+                eType4_9(data, type4, text4, i, element);
+                eType5_9(data, type5, text5, i, element);
+                eType6_9(data, type6, text6, i, element);
+                eType7(data, type7, text7, i, element);
+                eType8(data, type8, text8, i, element);
+                eType9(data, type9, text9, i, element);
+                eType10_11(data, type10, text10, i, element);
+                eType11(data, type11, text11, i, element);
             }
         });
     }
@@ -1204,10 +1196,12 @@ let pokeWeakness = async (id) => {
     }
 }
 
-let pokeRandom = async () => {
+let pokeRandom = () => {
     let randomNumber = Math.floor((Math.random() * (898 - 1 + 1)) + 1);
 
-    poke(randomNumber);
+    return randomNumber;
 }
 
-pokeRandom();
+randomN = pokeRandom();
+
+poke(randomN);
