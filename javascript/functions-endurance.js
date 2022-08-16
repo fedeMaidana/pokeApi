@@ -72,7 +72,8 @@ let eType4_5 = (data, type, text, i, element) => {
 
 let eType4_7 = (data, type, text, i, element) => {
     type.style.display = 'grid';
-    type.style.gridArea = '2 / 2 / 3 / 3';
+    //type.style.gridArea = '2 / 2 / 3 / 3';
+    type.style.gridArea = '2 / 1 / 3 / 2';
     type.style.justifySelf = 'center';
 
     if(i == 3){
@@ -137,7 +138,8 @@ let eType5_5 = (data, type, text, i, element) => {
 
 let eType5_7 = (data, type, text, i, element) => {
     type.style.display = 'grid';
-    type.style.gridArea = '2 / 3 / 3 / 4';
+    //type.style.gridArea = '2 / 3 / 3 / 4';
+    type.style.gridArea = '2 / 2 / 3 / 3';
     type.style.justifySelf = 'center';
 
     if(i == 4){
@@ -188,6 +190,31 @@ let eType6 = (data, type, text, i, element) => {
 let eType6_6 = (data, type, text, i, element) => {
     type.style.display = 'grid';
     type.style.gridArea = '2 / 3 / 4 / 4'
+
+    if(i == 5){
+        type.style.backgroundColor = pokeTypeColor(element.name);
+
+        position = data.names.findIndex(info => info.language.name === 'es');
+        text.innerHTML = data.names[position].name;
+    }
+}
+
+let eType6_7 = (data, type, text, i, element) => {
+    type.style.display = 'grid';
+    type.style.gridArea = '2 / 3 / 3 / 4'
+
+    if(i == 5){
+        type.style.backgroundColor = pokeTypeColor(element.name);
+
+        position = data.names.findIndex(info => info.language.name === 'es');
+        text.innerHTML = data.names[position].name;
+    }
+}
+
+let eType6_8 = (data, type, text, i, element) => {
+    type.style.display = 'grid';
+    type.style.gridArea = '2 / 3 / 3 / 4';
+    type.style.justifySelf = 'center';
 
     if(i == 5){
         type.style.backgroundColor = pokeTypeColor(element.name);

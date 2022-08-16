@@ -7,9 +7,6 @@ const URL_POKE_TYPES = (name) => `https://pokeapi.co/api/v2/type/${name}`;
 
 let pokeChart, randomN;
 
-//document.getElementById('arrow-left').addEventListener("click", arrowLeft);
-//document.getElementById('arrow-right').addEventListener("click", arrowRight);
-
 document.getElementById('arrow-left').onclick = () => {
     randomN -= 1;
     poke(randomN);
@@ -612,8 +609,22 @@ let pokeEndurance = async (id) => {
             type1.style.display = 'grid';
             type1.style.alignSelf = 'center';
             type1.style.border = 'none';
+            type1.style.backgroundColor = 'transparent';
 
             text1.innerHTML = 'n/a';
+
+            type2.style.display = 'none';
+            type3.style.display = 'none';
+            type4.style.display = 'none';
+            type5.style.display = 'none';
+            type6.style.display = 'none';
+            type7.style.display = 'none';
+            type8.style.display = 'none';
+            type9.style.display = 'none';
+            type10.style.display = 'none';
+            type11.style.display = 'none';
+        }else{
+            type1.style.border = '1px solid';
         }
 
         rt1.forEach(async(element, i) => {
@@ -623,6 +634,17 @@ let pokeEndurance = async (id) => {
                 typesContainer.style.gridTemplate = '1fr / 1fr';
                 type1.style.display = 'grid';
                 type1.style.alignSelf = 'center';
+                type1.style.border = '1px solid';
+                type2.style.display = 'none';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 type1.style.backgroundColor = pokeTypeColor(element.name);
 
@@ -630,6 +652,15 @@ let pokeEndurance = async (id) => {
                 text1.innerHTML = dataType.names[position].name;
             }else if(rt1.length == 2){
                 typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -637,6 +668,14 @@ let pokeEndurance = async (id) => {
                 type2.style.alignSelf = 'center';
             }else if(rt1.length == 3){
                 typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -646,6 +685,13 @@ let pokeEndurance = async (id) => {
                 type3.style.alignSelf = 'center';
             }else if(rt1.length == 4){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -657,6 +703,12 @@ let pokeEndurance = async (id) => {
                 type4.style.alignSelf = 'center';
             }else if(rt1.length == 5){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -670,6 +722,11 @@ let pokeEndurance = async (id) => {
                 type5.style.alignSelf = 'center';
             }else if(rt1.length == 6){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -687,6 +744,7 @@ let pokeEndurance = async (id) => {
                 enduranceContainer.style.paddingBottom = '5px';
                 typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
                 typesContainer.style.rowGap = '5px';
+                type11.style.display = 'none';
 
                 eType1(dataType, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -706,7 +764,7 @@ let pokeEndurance = async (id) => {
                 type8.style.alignSelf = 'center';
                 eType9(dataType, type9, text9, i, element);
                 type9.style.alignSelf = 'center';
-                eType10(dataType, type10, text10, i, element);
+                eType10_10(dataType, type10, text10, i, element);
                 type10.style.alignSelf = 'center';
             }
         });
@@ -813,6 +871,16 @@ let pokeEndurance = async (id) => {
             if(uniqs.length == 1){
                 typesContainer.style.gridTemplate = '1fr / 1fr';
                 type1.style.display = 'grid';
+                type2.style.display = 'none';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 type1.style.backgroundColor = pokeTypeColor(element.name);
 
@@ -820,17 +888,41 @@ let pokeEndurance = async (id) => {
                 text1.innerHTML = data.names[position].name;
             }else if(uniqs.length == 2){
                 typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
             }else if(uniqs.length == 3){
                 typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
                 eType3(data, type3, text3, i, element);
             }else if(uniqs.length == 4){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
@@ -838,6 +930,12 @@ let pokeEndurance = async (id) => {
                 eType4(data, type4, text4, i, element);
             }else if(uniqs.length == 5){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
@@ -846,6 +944,11 @@ let pokeEndurance = async (id) => {
                 eType5(data, type5, text5, i, element);
             }else if(uniqs.length == 6){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type7.style.display = 'none';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
@@ -855,27 +958,36 @@ let pokeEndurance = async (id) => {
                 eType6_6(data, type6, text6, i, element);
             }else if(uniqs.length == 7){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                type8.style.display = 'none';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
                 eType3(data, type3, text3, i, element);
                 eType4_7(data, type4, text4, i, element);
                 eType5_7(data, type5, text5, i, element);
-                eType6(data, type6, text6, i, element);
+                eType6_7(data, type6, text6, i, element);
                 eType7_7(data, type7, text7, i, element);
             }else if(uniqs.length == 8){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                type9.style.display = 'none';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
                 eType3(data, type3, text3, i, element);
                 eType4_9(data, type4, text4, i, element);
                 eType5_9(data, type5, text5, i, element);
-                eType6(data, type6, text6, i, element);
+                eType6_8(data, type6, text6, i, element);
                 eType7_8(data, type7, text7, i, element);
                 eType8_8(data, type8, text8, i, element);
             }else if(uniqs.length == 9){
                 typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                type10.style.display = 'none';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
@@ -888,6 +1000,7 @@ let pokeEndurance = async (id) => {
                 eType9(data, type9, text9, i, element);
             }else if(uniqs.length == 10){
                 typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+                type11.style.display = 'none';
 
                 eType1(data, type1, text1, i, element);
                 eType2(data, type2, text2, i, element);
@@ -985,6 +1098,9 @@ let pokeWeakness = async (id) => {
             return dataType;
         };
 
+        console.log('con un tipo:');
+        console.log(wt1);
+
         wt1.forEach(async(element, i) => {
             let data = await urlType(element.name);
 
@@ -992,6 +1108,12 @@ let pokeWeakness = async (id) => {
                 typesContainer.style.gridTemplate = '1fr / 1fr';
                 type1.style.display = 'grid';
                 type1.style.alignSelf = 'center';
+                type2.style.display = 'none';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 type1.style.backgroundColor = pokeTypeColor(element.name);
 
@@ -999,6 +1121,11 @@ let pokeWeakness = async (id) => {
                 text1.innerHTML = data.names[position].name;
             }else if(wt1.length == 2){
                 typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -1006,6 +1133,10 @@ let pokeWeakness = async (id) => {
                 type2.style.alignSelf = 'center';
             }else if(wt1.length == 3){
                 typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -1015,6 +1146,9 @@ let pokeWeakness = async (id) => {
                 type3.style.alignSelf = 'center';
             }else if(wt1.length == 4){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -1026,6 +1160,8 @@ let pokeWeakness = async (id) => {
                 type4.style.alignSelf = 'center';
             }else if(wt1.length == 5){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 type1.style.alignSelf = 'center';
@@ -1136,11 +1272,20 @@ let pokeWeakness = async (id) => {
         uniqs.forEach(async(element, i) => {
             let data = await urlType(element.name);
 
+            console.log('con dos tipos:');
+            console.log(uniqs);
+
             typesContainer.style.alignItems = 'center';
 
             if(uniqs.length == 1){
                 typesContainer.style.gridTemplate = '1fr / 1fr';
                 type1.style.display = 'grid';
+                type2.style.display = 'none';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 type1.style.backgroundColor = pokeTypeColor(element.name);
 
@@ -1148,17 +1293,29 @@ let pokeWeakness = async (id) => {
                 text1.innerHTML = data.names[position].name;
             }else if(uniqs.length == 2){
                 typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                type3.style.display = 'none';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 wType2(data, type2, text2, i, element);
             }else if(uniqs.length == 3){
                 typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                type4.style.display = 'none';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 wType2(data, type2, text2, i, element);
                 wType3(data, type3, text3, i, element);
             }else if(uniqs.length == 4){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type5.style.display = 'none';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 wType2(data, type2, text2, i, element);
@@ -1166,6 +1323,8 @@ let pokeWeakness = async (id) => {
                 wType4(data, type4, text4, i, element);
             }else if(uniqs.length == 5){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type6.style.display = 'none';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 wType2(data, type2, text2, i, element);
@@ -1174,6 +1333,7 @@ let pokeWeakness = async (id) => {
                 wType5(data, type5, text5, i, element);
             }else if(uniqs.length == 6){
                 typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                type7.style.display = 'none';
 
                 wType1(data, type1, text1, i, element);
                 wType2(data, type2, text2, i, element);
