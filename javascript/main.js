@@ -1,3 +1,7 @@
+const api = axios.create({
+    baseURL: 'https://pokeapi.co/api/v2'
+});
+
 const URL_POKE = (id) => `https://pokeapi.co/api/v2/pokemon/${id}/`;
 const URL_POKE_SPECIES = (id) => `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
 const URL_POKE_GENDER_FEMALE = `https://pokeapi.co/api/v2/gender/1/`;
@@ -7,18 +11,14 @@ const URL_POKE_TYPES = (name) => `https://pokeapi.co/api/v2/type/${name}`;
 
 let pokeChart, randomN;
 
-document.getElementById('arrow-left').onclick = () => {
-    randomN -= 1;
-    poke(randomN);
-};
-document.getElementById('arrow-right').onclick = () =>{
-    randomN += 1
-    poke(randomN);
-};
+document.getElementById('arrow-left').onclick = () => {poke(randomN -= 1)};
+document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
 
 let poke = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    /*let response = await fetch(URL_POKE(id));
+    let data = await response.json();*/
+
+    let {data} = await api(`/pokemon/${id}/`);
 
     pokeName(data.id);
     pokeImage(data.id);
@@ -35,8 +35,7 @@ let poke = async (id) => {
 }
 
 let pokeName = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let h1 = document.querySelector('h1');
 
@@ -44,8 +43,7 @@ let pokeName = async (id) => {
 }
 
 let pokeImage = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let img = document.getElementById('img-poke').src = data.sprites.other["official-artwork"].front_default;
 
@@ -131,8 +129,7 @@ let pokeTypeColor = (name) => {
 }
 
 let pokeType = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let typesPoke = document.getElementsByClassName('types-poke');
     let typePoke = document.getElementsByClassName('type-poke');
@@ -269,8 +266,7 @@ let pokeType = async (id) => {
 }
 
 let pokeGraph = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let marksCanvas = document.getElementById('marcks-chart');
 
@@ -329,8 +325,7 @@ let pokeGraph = async (id) => {
 }
 
 let pokeDescription = async (id) => {
-    let response = await fetch(URL_POKE_SPECIES(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon-species/${id}/`);
 
     let description = document.getElementById('description');
     let index = data.flavor_text_entries.findIndex(info => info.language.name === 'es');
@@ -339,32 +334,25 @@ let pokeDescription = async (id) => {
 }
 
 let pokeHeight = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let height = document.getElementById('height').innerHTML = `${data.height / 10} m`;
 }
 
 let pokeWeight = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let weight = document.getElementById('weight').innerHTML = `${data.weight / 10} Kg`;
 }
 
 let pokeSex = async (name) => {
-    let responseFemale = await fetch(URL_POKE_GENDER_FEMALE);
-    let dataFemale = await responseFemale.json();
+    let dataFemale = await api(`/gender/1/`);
+    let dataMale = await api(`/gender/2/`);
+    let dataGenderless = await api(`/gender/3/`);
 
-    let responseMale = await fetch(URL_POKE_GENDER_MALE);
-    let dataMale = await responseMale.json();
-
-    let responseGenderless = await fetch(URL_POKE_GENDERLESS);
-    let dataGenderless = await responseGenderless.json();
-
-    let indexFemale = dataFemale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
-    let indexMale = dataMale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
-    let indexGenderless = dataGenderless.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+    let indexFemale = dataFemale.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+    let indexMale = dataMale.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+    let indexGenderless = dataGenderless.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
 
     let sex = document.getElementById('sex');
     let icon1 = document.getElementById('icon1');
@@ -425,8 +413,7 @@ let pokeSex = async (name) => {
 }
 
 let pokeCategory = async (id) => {
-    let response = await fetch(URL_POKE_SPECIES(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon-species/${id}/`);
 
     let category = document.getElementById('category');
 
@@ -443,8 +430,7 @@ let pokeCategory = async (id) => {
 }
 
 let pokeAbility = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let url1, url2, url3;
 
@@ -459,36 +445,30 @@ let pokeAbility = async (id) => {
         url1 = data.abilities[0].ability.url;
     }
 
-    let responseUrl1, dataUrl1, responseUrl2, dataUrl2, responseUrl3, dataUrl3;
+    let dataUrl1, dataUrl2, dataUrl3;
 
     if(data.abilities.length == 3){
-        responseUrl1 = await fetch(url1);
-        dataUrl1 = await responseUrl1.json();
-        responseUrl2 = await fetch(url2);
-        dataUrl2 = await responseUrl2.json();
-        responseUrl3 = await fetch(url3);
-        dataUrl3 = await responseUrl3.json();
+        dataUrl1 = await axios.get(url1);
+        dataUrl2 = await axios.get(url2);
+        dataUrl3 = await axios.get(url3);
     }else if(data.abilities.length == 2){
-        responseUrl1 = await fetch(url1);
-        dataUrl1 = await responseUrl1.json();
-        responseUrl2 = await fetch(url2);
-        dataUrl2 = await responseUrl2.json();
+        dataUrl1 = await axios.get(url1);
+        dataUrl2 = await axios.get(url2);
     }else if(data.abilities.length == 1){
-        responseUrl1 = await fetch(url1);
-        dataUrl1 = await responseUrl1.json();
+        dataUrl1 = await axios.get(url1);
     }
 
     let indexUrl1, indexUrl2, indexUrl3;
 
     if(data.abilities.length == 3){
-        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
-        indexUrl2 = dataUrl2.names.findIndex(info => info.language.name === 'es');
-        indexUrl3 = dataUrl3.names.findIndex(info => info.language.name === 'es');
+        indexUrl1 = dataUrl1.data.names.findIndex(info => info.language.name === 'es');
+        indexUrl2 = dataUrl2.data.names.findIndex(info => info.language.name === 'es');
+        indexUrl3 = dataUrl3.data.names.findIndex(info => info.language.name === 'es');
     }else if(data.abilities.length == 2){
-        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
-        indexUrl2 = dataUrl2.names.findIndex(info => info.language.name === 'es');
+        indexUrl1 = dataUrl1.data.names.findIndex(info => info.language.name === 'es');
+        indexUrl2 = dataUrl2.data.names.findIndex(info => info.language.name === 'es');
     }else if(data.abilities.length == 1){
-        indexUrl1 = dataUrl1.names.findIndex(info => info.language.name === 'es');
+        indexUrl1 = dataUrl1.data.names.findIndex(info => info.language.name === 'es');
     }
 
     let abilityClass = document.getElementById('ability-container');
@@ -507,30 +487,29 @@ let pokeAbility = async (id) => {
         pokeAbility2.style.display = 'grid';
         pokeAbility3.style.display = 'grid';
         abilityClass.style.width = '43vw';
-        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
-        pokeAbility2.innerHTML = dataUrl2.names[indexUrl2].name;
-        pokeAbility3.innerHTML = dataUrl3.names[indexUrl3].name;
+        pokeAbility1.innerHTML = dataUrl1.data.names[indexUrl1].name;
+        pokeAbility2.innerHTML = dataUrl2.data.names[indexUrl2].name;
+        pokeAbility3.innerHTML = dataUrl3.data.names[indexUrl3].name;
     }else if(data.abilities.length == 2){
         ability.style.gridTemplateColumns = '1fr 1fr';
         pokeAbility1.style.display = 'grid';
         pokeAbility2.style.display = 'grid';
         pokeAbility3.style.display = 'none';
         abilityClass.style.width = '33vw';
-        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
-        pokeAbility2.innerHTML = dataUrl2.names[indexUrl2].name;
+        pokeAbility1.innerHTML = dataUrl1.data.names[indexUrl1].name;
+        pokeAbility2.innerHTML = dataUrl2.data.names[indexUrl2].name;
     }else if(data.abilities.length == 1){
         ability.style.gridTemplateColumns = '1fr';
         pokeAbility1.style.display = 'grid';
         pokeAbility2.style.display = 'none';
         pokeAbility3.style.display = 'none';
         abilityClass.style.width = '20vw';
-        pokeAbility1.innerHTML = dataUrl1.names[indexUrl1].name;
+        pokeAbility1.innerHTML = dataUrl1.data.names[indexUrl1].name;
     }
 }
 
 let pokeEndurance = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let typeUrl1, typeUrl2;
 
@@ -541,28 +520,24 @@ let pokeEndurance = async (id) => {
         typeUrl2 = data.types[1].type.url;
     }
 
-    let responseUrl1, dataUrl1, responseUrl2, dataUrl2;
+    let dataUrl1, dataUrl2;
 
     let weakness1, weakness2, resistance1, resistance2;
 
     if(data.types.length == 1){
-        responseUrl1 = await fetch(typeUrl1);
-        dataUrl1 = await responseUrl1.json();
+        dataUrl1 = await axios.get(typeUrl1);
 
-        resistance1 = dataUrl1.damage_relations.half_damage_from;
-        weakness1 = dataUrl1.damage_relations.double_damage_from;
+        resistance1 = dataUrl1.data.damage_relations.half_damage_from;
+        weakness1 = dataUrl1.data.damage_relations.double_damage_from;
 
     }else if(data.types.length == 2){
-        responseUrl1 = await fetch(typeUrl1);
-        dataUrl1 = await responseUrl1.json();
+        dataUrl1 = await axios.get(typeUrl1);
+        dataUrl2 = await axios.get(typeUrl2);
 
-        responseUrl2 = await fetch(typeUrl2);
-        dataUrl2 = await responseUrl2.json();
-
-        weakness1 = dataUrl1.damage_relations.double_damage_from;
-        weakness2 = dataUrl2.damage_relations.double_damage_from;
-        resistance1 = dataUrl1.damage_relations.half_damage_from;
-        resistance2 = dataUrl2.damage_relations.half_damage_from;
+        weakness1 = dataUrl1.data.damage_relations.double_damage_from;
+        weakness2 = dataUrl2.data.damage_relations.double_damage_from;
+        resistance1 = dataUrl1.data.damage_relations.half_damage_from;
+        resistance2 = dataUrl2.data.damage_relations.half_damage_from;
     }
 
     let wt1, wt2, rt1, rt2, pos, countR1 = 0, countR2 = 0;
@@ -598,10 +573,9 @@ let pokeEndurance = async (id) => {
         let position;
 
         let urlType = async (x) => {
-            let responseType = await fetch(URL_POKE_TYPES(x));
-            let dataType = await responseType.json();
+            let dataType = await api(`/type/${x}`);
 
-            return dataType;
+            return dataType.data;
         };
 
         if(data.types[0].type.name == 'normal'){
@@ -794,7 +768,7 @@ let pokeEndurance = async (id) => {
             });
         }
 
-        dataUrl1.damage_relations.no_damage_from.forEach(element => {
+        dataUrl1.data.damage_relations.no_damage_from.forEach(element => {
             let name = element.name;
 
             rt2.forEach(elementRT2 => {
@@ -824,7 +798,7 @@ let pokeEndurance = async (id) => {
             });
         }
 
-        dataUrl2.damage_relations.no_damage_from.forEach(element => {
+        dataUrl2.data.damage_relations.no_damage_from.forEach(element => {
             let name = element.name;
 
             rt1.forEach(elementRT1 => {
@@ -857,10 +831,9 @@ let pokeEndurance = async (id) => {
         let position;
 
         let urlType = async (x) => {
-            let responseType = await fetch(URL_POKE_TYPES(x));
-            let dataType = await responseType.json();
+            let dataType = await api(`/type/${x}`);
 
-            return dataType;
+            return dataType.data;
         };
 
         uniqs.forEach(async(element, i) => {
@@ -1032,8 +1005,7 @@ let pokeEndurance = async (id) => {
 }
 
 let pokeWeakness = async (id) => {
-    let response = await fetch(URL_POKE(id));
-    let data = await response.json();
+    let {data} = await api(`/pokemon/${id}/`);
 
     let typeUrl1, typeUrl2;
 
@@ -1049,23 +1021,19 @@ let pokeWeakness = async (id) => {
     let weakness1, weakness2, resistance1, resistance2;
 
     if(data.types.length == 1){
-        responseUrl1 = await fetch(typeUrl1);
-        dataUrl1 = await responseUrl1.json();
+        dataUrl1 = await axios.get(typeUrl1);
 
-        weakness1 = dataUrl1.damage_relations.double_damage_from;
-        resistance1 = dataUrl1.damage_relations.half_damage_from;
+        weakness1 = dataUrl1.data.damage_relations.double_damage_from;
+        resistance1 = dataUrl1.data.damage_relations.half_damage_from;
 
     }else if(data.types.length == 2){
-        responseUrl1 = await fetch(typeUrl1);
-        dataUrl1 = await responseUrl1.json();
+        dataUrl1 = await axios.get(typeUrl1);
+        dataUrl2 = await axios.get(typeUrl2);
 
-        responseUrl2 = await fetch(typeUrl2);
-        dataUrl2 = await responseUrl2.json();
-
-        weakness1 = dataUrl1.damage_relations.double_damage_from;
-        weakness2 = dataUrl2.damage_relations.double_damage_from;
-        resistance1 = dataUrl1.damage_relations.half_damage_from;
-        resistance2 = dataUrl2.damage_relations.half_damage_from;
+        weakness1 = dataUrl1.data.damage_relations.double_damage_from;
+        weakness2 = dataUrl2.data.damage_relations.double_damage_from;
+        resistance1 = dataUrl1.data.damage_relations.half_damage_from;
+        resistance2 = dataUrl2.data.damage_relations.half_damage_from;
     }
 
     let wt1, wt2, rt1, rt2, pos, countW1 = 0, countW2 = 0;
@@ -1092,14 +1060,10 @@ let pokeWeakness = async (id) => {
         let position;
 
         let urlType = async (x) => {
-            let responseType = await fetch(URL_POKE_TYPES(x));
-            let dataType = await responseType.json();
+            let dataType = await api(`/type/${x}`);
 
-            return dataType;
+            return dataType.data;
         };
-
-        console.log('con un tipo:');
-        console.log(wt1);
 
         wt1.forEach(async(element, i) => {
             let data = await urlType(element.name);
@@ -1201,7 +1165,7 @@ let pokeWeakness = async (id) => {
             });
         }
 
-        dataUrl1.damage_relations.no_damage_from.forEach(element => {
+        dataUrl1.data.damage_relations.no_damage_from.forEach(element => {
             let name = element.name;
 
             wt2.forEach(elementWT2 => {
@@ -1231,7 +1195,7 @@ let pokeWeakness = async (id) => {
             });
         }
 
-        dataUrl2.damage_relations.no_damage_from.forEach(element => {
+        dataUrl2.data.damage_relations.no_damage_from.forEach(element => {
             let name = element.name;
 
             wt1.forEach(elementWT1 => {
@@ -1263,17 +1227,13 @@ let pokeWeakness = async (id) => {
         let position;
 
         let urlType = async (x) => {
-            let responseType = await fetch(URL_POKE_TYPES(x));
-            let dataType = await responseType.json();
+            let dataType = await api(`/type/${x}`);
 
-            return dataType;
+            return dataType.data;
         };
 
         uniqs.forEach(async(element, i) => {
             let data = await urlType(element.name);
-
-            console.log('con dos tipos:');
-            console.log(uniqs);
 
             typesContainer.style.alignItems = 'center';
 
@@ -1362,6 +1322,4 @@ let pokeRandom = () => {
     return randomNumber;
 }
 
-randomN = pokeRandom();
-
-poke(randomN);
+poke(randomN = pokeRandom());
