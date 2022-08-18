@@ -72,7 +72,7 @@ let wType4_5 = (data, type, text, i, element) => {
 
 let wType4_7 = (data, type, text, i, element) => {
     type.style.display = 'grid';
-    type.style.gridArea = '2 / 2 / 3 / 3';
+    type.style.gridArea = '2 / 1 / 3 / 2';
     type.style.justifySelf = 'center';
 
     if(i == 3){
@@ -111,7 +111,7 @@ let wType5_5 = (data, type, text, i, element) => {
 
 let wType5_7 = (data, type, text, i, element) => {
     type.style.display = 'grid';
-    type.style.gridArea = '2 / 3 / 3 / 4';
+    type.style.gridArea = '2 / 2 / 3 / 3';
     type.style.justifySelf = 'center';
 
     if(i == 4){
@@ -136,6 +136,18 @@ let wType6 = (data, type, text, i, element) => {
 let wType6_6 = (data, type, text, i, element) => {
     type.style.display = 'grid';
     type.style.gridArea = '2 / 3 / 4 / 4'
+
+    if(i == 5){
+        type.style.backgroundColor = pokeTypeColor(element.name);
+
+        position = data.names.findIndex(info => info.language.name === 'es');
+        text.innerHTML = data.names[position].name;
+    }
+}
+
+let wType6_7 = (data, type, text, i, element) => {
+    type.style.display = 'grid';
+    type.style.gridArea = '2 / 3 / 3 / 4'
 
     if(i == 5){
         type.style.backgroundColor = pokeTypeColor(element.name);
