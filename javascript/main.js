@@ -2,8 +2,27 @@ const api = axios.create({baseURL: 'https://pokeapi.co/api/v2'});
 
 let pokeChart, randomN;
 
+var keys = {
+    LEFT: 37,
+    RIGHT: 39
+};
+
+//console.log(key.keyCode)
+
 document.getElementById('arrow-left').onclick = () => {poke(randomN -= 1)};
 document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
+
+window.onkeyup = (key) => {
+    try{
+        if(key.keyCode == keys.LEFT){
+            poke(randomN -= 1);
+        }else if(key.keyCode == keys.RIGHT){
+            poke(randomN += 1);
+        }
+    }catch(error){
+        console.log(error)
+    }
+};
 
 let poke = async (id) => {
     /*let response = await fetch(URL_POKE(id));
@@ -24,6 +43,7 @@ let poke = async (id) => {
         pokeAbility(data.id);
         pokeEndurance(data.id);
         pokeWeakness(data.id);
+        pokeImmunity(data.id);
     }catch(error){
         console.log(error);
     }
@@ -107,9 +127,23 @@ let pokeGraph = async (id) => {
         pokeChart = new Chart(canvasGraph, {
             type: 'radar',
             data: {
-                labels: ['Salud', 'Ataque', 'At. Esp.', 'Velocidad', 'Def. Esp.', 'Defensa'],
+                labels: [
+                    `Salud ${data.stats[0].base_stat}`,
+                    `Ataque ${data.stats[1].base_stat}`,
+                    `At. Esp. ${data.stats[3].base_stat}`,
+                    `Velocidad ${data.stats[5].base_stat}`,
+                    `Def. Esp. ${data.stats[4].base_stat}`,
+                    `Defensa ${data.stats[2].base_stat}`
+                ],
                 datasets: [{
-                    data: [`${data.stats[0].base_stat}`, `${data.stats[1].base_stat}`, `${data.stats[3].base_stat}`, `${data.stats[5].base_stat}`, `${data.stats[4].base_stat}`, `${data.stats[2].base_stat}`],
+                    data: [
+                        `${data.stats[0].base_stat}`,
+                        `${data.stats[1].base_stat}`,
+                        `${data.stats[3].base_stat}`,
+                        `${data.stats[5].base_stat}`,
+                        `${data.stats[4].base_stat}`,
+                        `${data.stats[2].base_stat}`
+                    ],
                     backgroundColor: [
                         'rgba(198, 243, 133, .4)',
                     ],
@@ -120,6 +154,11 @@ let pokeGraph = async (id) => {
             },
             options: {
                 responsive: true,
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                },
                 plugins: {
                     legend: {
                         display: false
@@ -364,13 +403,13 @@ let pokeEndurance = async (id) => {
 
             if(data.types[0].type.name == 'normal'){
                 typesContainer.style.gridTemplate = '1fr / 1fr';
-                type1.style.display = 'grid';
-                type1.style.alignSelf = 'center';
-                type1.style.border = 'none';
-                type1.style.backgroundColor = 'transparent';
+                enduranceTypeNone.style.display = 'grid';
+                enduranceTypeNone.style.alignSelf = 'center';
+                enduranceTypeNone.style.backgroundColor = 'rgb(0, 0, 0)';
+                enduranceTextNone.innerHTML = 'n/a';
+                enduranceTextNone.style.color = 'rgb(255, 255, 255';
 
-                text1.innerHTML = 'n/a';
-
+                type1.style.display = 'none';
                 type2.style.display = 'none';
                 type3.style.display = 'none';
                 type4.style.display = 'none';
@@ -381,8 +420,6 @@ let pokeEndurance = async (id) => {
                 type9.style.display = 'none';
                 type10.style.display = 'none';
                 type11.style.display = 'none';
-            }else{
-                type1.style.border = '1px solid';
             }
 
             rt1.forEach(async(element, i) => {
@@ -393,6 +430,7 @@ let pokeEndurance = async (id) => {
                     type1.style.display = 'grid';
                     type1.style.alignSelf = 'center';
                     type1.style.border = '1px solid';
+                    enduranceTypeNone.style.display = 'none';
                     type2.style.display = 'none';
                     type3.style.display = 'none';
                     type4.style.display = 'none';
@@ -410,6 +448,7 @@ let pokeEndurance = async (id) => {
                     text1.innerHTML = dataType.names[position].name;
                 }else if(rt1.length == 2){
                     typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                    enduranceTypeNone.style.display = 'none';
                     type3.style.display = 'none';
                     type4.style.display = 'none';
                     type5.style.display = 'none';
@@ -426,6 +465,7 @@ let pokeEndurance = async (id) => {
                     type2.style.alignSelf = 'center';
                 }else if(rt1.length == 3){
                     typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type4.style.display = 'none';
                     type5.style.display = 'none';
                     type6.style.display = 'none';
@@ -443,6 +483,7 @@ let pokeEndurance = async (id) => {
                     type3.style.alignSelf = 'center';
                 }else if(rt1.length == 4){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type5.style.display = 'none';
                     type6.style.display = 'none';
                     type7.style.display = 'none';
@@ -461,6 +502,7 @@ let pokeEndurance = async (id) => {
                     type4.style.alignSelf = 'center';
                 }else if(rt1.length == 5){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type6.style.display = 'none';
                     type7.style.display = 'none';
                     type8.style.display = 'none';
@@ -480,6 +522,7 @@ let pokeEndurance = async (id) => {
                     type5.style.alignSelf = 'center';
                 }else if(rt1.length == 6){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type7.style.display = 'none';
                     type8.style.display = 'none';
                     type9.style.display = 'none';
@@ -502,6 +545,7 @@ let pokeEndurance = async (id) => {
                     enduranceContainer.style.paddingBottom = '5px';
                     typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
                     typesContainer.style.rowGap = '5px';
+                    enduranceTypeNone.style.display = 'none';
                     type11.style.display = 'none';
 
                     eType1(dataType, type1, text1, i, element);
@@ -627,6 +671,7 @@ let pokeEndurance = async (id) => {
 
                 if(uniqs.length == 1){
                     typesContainer.style.gridTemplate = '1fr / 1fr';
+                    enduranceTypeNone.style.display = 'none';
                     type1.style.display = 'grid';
                     type2.style.display = 'none';
                     type3.style.display = 'none';
@@ -645,6 +690,7 @@ let pokeEndurance = async (id) => {
                     text1.innerHTML = data.names[position].name;
                 }else if(uniqs.length == 2){
                     typesContainer.style.gridTemplate = '1fr / 1fr 1fr';
+                    enduranceTypeNone.style.display = 'none';
                     type3.style.display = 'none';
                     type4.style.display = 'none';
                     type5.style.display = 'none';
@@ -659,6 +705,7 @@ let pokeEndurance = async (id) => {
                     eType2(data, type2, text2, i, element);
                 }else if(uniqs.length == 3){
                     typesContainer.style.gridTemplate = '1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type4.style.display = 'none';
                     type5.style.display = 'none';
                     type6.style.display = 'none';
@@ -673,6 +720,7 @@ let pokeEndurance = async (id) => {
                     eType3(data, type3, text3, i, element);
                 }else if(uniqs.length == 4){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type5.style.display = 'none';
                     type6.style.display = 'none';
                     type7.style.display = 'none';
@@ -687,6 +735,7 @@ let pokeEndurance = async (id) => {
                     eType4(data, type4, text4, i, element);
                 }else if(uniqs.length == 5){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type6.style.display = 'none';
                     type7.style.display = 'none';
                     type8.style.display = 'none';
@@ -701,6 +750,7 @@ let pokeEndurance = async (id) => {
                     eType5(data, type5, text5, i, element);
                 }else if(uniqs.length == 6){
                     typesContainer.style.gridTemplate = '1fr 1fr / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type7.style.display = 'none';
                     type8.style.display = 'none';
                     type9.style.display = 'none';
@@ -715,6 +765,7 @@ let pokeEndurance = async (id) => {
                     eType6_6(data, type6, text6, i, element);
                 }else if(uniqs.length == 7){
                     typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type8.style.display = 'none';
                     type9.style.display = 'none';
                     type10.style.display = 'none';
@@ -729,6 +780,7 @@ let pokeEndurance = async (id) => {
                     eType7_7(data, type7, text7, i, element);
                 }else if(uniqs.length == 8){
                     typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type9.style.display = 'none';
                     type10.style.display = 'none';
                     type11.style.display = 'none';
@@ -743,6 +795,7 @@ let pokeEndurance = async (id) => {
                     eType8_8(data, type8, text8, i, element);
                 }else if(uniqs.length == 9){
                     typesContainer.style.gridTemplate = 'repeat(3, 1fr) / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type10.style.display = 'none';
                     type11.style.display = 'none';
 
@@ -757,6 +810,7 @@ let pokeEndurance = async (id) => {
                     eType9(data, type9, text9, i, element);
                 }else if(uniqs.length == 10){
                     typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
                     type11.style.display = 'none';
 
                     eType1(data, type1, text1, i, element);
@@ -771,6 +825,7 @@ let pokeEndurance = async (id) => {
                     eType10_10(data, type10, text10, i, element);
                 }else if(uniqs.length == 11){
                     typesContainer.style.gridTemplate = 'repeat(4, 1fr) / repeat(3, 1fr)';
+                    enduranceTypeNone.style.display = 'none';
 
                     eType1(data, type1, text1, i, element);
                     eType2(data, type2, text2, i, element);
@@ -795,7 +850,7 @@ let pokeWeakness = async (id) => {
     try{
         let {data} = await api(`/pokemon/${id}/`);
 
-        let typeUrl1, typeUrl2;
+        let typeUrl1, typeUrl2, dataUrl1, dataUrl2, weakness1, weakness2, resistance1, resistance2;
 
         if(data.types.length == 1){
             typeUrl1 = data.types[0].type.url;
@@ -804,14 +859,11 @@ let pokeWeakness = async (id) => {
             typeUrl2 = data.types[1].type.url;
         }
 
-        let dataUrl1, dataUrl2, weakness1, weakness2, resistance1, resistance2;
-
         if(data.types.length == 1){
             dataUrl1 = await axios.get(typeUrl1);
 
             weakness1 = dataUrl1.data.damage_relations.double_damage_from;
             resistance1 = dataUrl1.data.damage_relations.half_damage_from;
-
         }else if(data.types.length == 2){
             dataUrl1 = await axios.get(typeUrl1);
             dataUrl2 = await axios.get(typeUrl2);
@@ -1083,6 +1135,145 @@ let pokeWeakness = async (id) => {
                     wType7(data, weaknessType7, weaknessText7, i, element);
                 }
             });
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
+
+let pokeImmunity = async (id) => {
+    try{
+        let {data} = await api(`/pokemon/${id}/`);
+
+        let typeUrl1, typeUrl2, dataUrl1, dataUrl2, immnunity1, immnunity2, immunities;
+
+        if(data.types.length == 1){
+            typeUrl1 = data.types[0].type.url;
+        }else if(data.types.length == 2){
+            typeUrl1 = data.types[0].type.url;
+            typeUrl2 = data.types[1].type.url;
+        }
+
+        if(data.types.length == 1){
+            dataUrl1 = await axios.get(typeUrl1);
+
+            immnunity1 = dataUrl1.data.damage_relations.no_damage_from;
+        }else if(data.types.length == 2){
+            dataUrl1 = await axios.get(typeUrl1);
+            dataUrl2 = await axios.get(typeUrl2);
+
+            immnunity1 = dataUrl1.data.damage_relations.no_damage_from;
+            immnunity2 = dataUrl2.data.damage_relations.no_damage_from;
+        }
+
+        if(data.types.length == 1){
+            if(immnunity1.length == 0){
+                typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+            }else if(immnunity1.length == 1){
+                immnunityType1.style.display = 'grid';
+                typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+            }else if(immnunity1.length == 2){
+                immnunityType1.style.display = 'grid';
+                immnunityType2.style.display = 'grid';
+                typesContainerImmunity.style.gridTemplate = '1fr / 1fr 1fr';
+            }
+
+            let urlType = async (x) => {
+                let dataType = await api(`/type/${x}`);
+
+                return dataType.data;
+            };
+
+            if(immnunity1.length == 0){
+                immnunityType1.style.display = 'none';
+                immnunityType2.style.display = 'none';
+                immnunityType3.style.display = 'none';
+
+                typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+                immnunityTypeNone.style.display = 'grid';
+
+                immnunityTypeNone.style.backgroundColor = 'rgb(0, 0, 0)';
+                immnunityTextNone.innerHTML = 'n/a';
+                immnunityTextNone.style.color = 'rgb(255, 255, 255';
+            }
+
+            immnunity1.forEach(async(element, i) => {
+                let dataType = await urlType(element.name);
+
+                if(immnunity1.length == 1){
+                    immnunityTypeNone.style.display = 'none';
+                    immnunityType2.style.display = 'none';
+                    immnunityType3.style.display = 'none';
+
+                    typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+                    iType1(dataType, immnunityType1, immnunityText1, i, element)
+                }else if(immnunity1.length == 2 ){
+                    immnunityTypeNone.style.display = 'none';
+                    immnunityType3.style.display = 'none';
+
+                    typesContainerImmunity.style.gridTemplate = '1fr / 1fr 1fr';
+                    iType1(dataType, immnunityType1, immnunityText1, i, element);
+                    iType2(dataType, immnunityType2, immnunityText2, i, element);
+                }
+            });
+        }else if(data.types.length == 2){
+            if(immnunity1.length == 1 && immnunity2.length == 0){
+                immunities = immnunity1.slice();
+            }else if(immnunity1.length == 0 && immnunity2.length == 1){
+                immunities = immnunity2.slice();
+            }else if((immnunity1.length == 2 && immnunity2.length == 0) || (immnunity1.length == 0 && immnunity2.length == 2) || (immnunity1.length == 1 && immnunity2.length == 1)){
+                immunities = immnunity1.concat(immnunity2);
+            }else if((immnunity1.length == 1 && immnunity2.length == 2) || (immnunity1.length == 2 && immnunity2.length == 1)){
+                immunities = immnunity1.concat(immnunity2);
+            }
+
+            let urlType = async (x) => {
+                let dataType = await api(`/type/${x}`);
+
+                return dataType.data;
+            };
+
+            if(immnunity1.length == 0 && immnunity2.length == 0){
+                immnunityType1.style.display = 'none';
+                immnunityType2.style.display = 'none';
+                immnunityType3.style.display = 'none';
+
+                typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+                immnunityTypeNone.style.display = 'grid';
+
+                immnunityTypeNone.style.backgroundColor = 'rgb(0, 0, 0)';
+                immnunityTextNone.innerHTML = 'n/a';
+                immnunityTextNone.style.color = 'rgb(255, 255, 255';
+            }
+
+            if(immunities != undefined){
+                immunities.forEach(async(element, i) => {
+                    let dataType = await urlType(element.name);
+
+                    if((immnunity1.length == 1 && immnunity2.length == 0) || (immnunity1.length == 0 && immnunity2.length == 1)){
+                        immnunityTypeNone.style.display = 'none';
+                        immnunityType2.style.display = 'none';
+                        immnunityType3.style.display = 'none';
+
+                        typesContainerImmunity.style.gridTemplate = '1fr / 1fr';
+                        iType1(dataType, immnunityType1, immnunityText1, i, element)
+                    }else if((immnunity1.length == 2 && immnunity2.length == 0) || (immnunity1.length == 0 && immnunity2.length == 2) || (immnunity1.length == 1 && immnunity2.length == 1)){
+                        immnunityTypeNone.style.display = 'none';
+                        immnunityType3.style.display = 'none';
+
+                        typesContainerImmunity.style.gridTemplate = '1fr / 1fr 1fr';
+                        iType1(dataType, immnunityType1, immnunityText1, i, element);
+                        iType2(dataType, immnunityType2, immnunityText2, i, element);
+                    }else if((immnunity1.length == 1 && immnunity2.length == 2) || (immnunity1.length == 2 && immnunity2.length == 1)){
+                        immnunityTypeNone.style.display = 'none';
+
+                        typesContainerImmunity.style.gridTemplate = '1fr / 1fr 1fr 1fr';
+                        iType1(dataType, immnunityType1, immnunityText1, i, element);
+                        iType2(dataType, immnunityType2, immnunityText2, i, element);
+                        iType3(dataType, immnunityType3, immnunityText3, i, element);
+                    }
+                });
+            }
         }
     }catch(error){
         console.log(error);

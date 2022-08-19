@@ -31,6 +31,8 @@ let pokeAbility2 = document.getElementById('ability2');
 
 let enduranceContainer = document.getElementById('qualities__endurance');
 let typesContainer = document.getElementById('qualities__endurance__types');
+let enduranceTypeNone = document.getElementById('qualities__endurance__types__type-none');
+let enduranceTextNone = document.getElementById('qualities__endurance__types__text-none');
 let type1 = document.getElementById('qualities__endurance__types__type-1');
 let text1 = document.getElementById('qualities__endurance__types__text-1');
 let type2 = document.getElementById('qualities__endurance__types__type-2');
@@ -69,3 +71,13 @@ let weaknessType6 = document.getElementById('qualities__weakness__types__type-6'
 let weaknessText6 = document.getElementById('qualities__weakness__types__text-6');
 let weaknessType7 = document.getElementById('qualities__weakness__types__type-7');
 let weaknessText7 = document.getElementById('qualities__weakness__types__text-7');
+
+let typesContainerImmunity = document.getElementById('qualities__immunity__types');
+let immnunityTypeNone = document.getElementById('qualities__immunity__types__type-none');
+let immnunityTextNone = document.getElementById('qualities__immunity__types__text-none');
+let immnunityType1 = document.getElementById('qualities__immunity__types__type-1');
+let immnunityText1 = document.getElementById('qualities__immunity__types__text-1');
+let immnunityType2 = document.getElementById('qualities__immunity__types__type-2');
+let immnunityText2 = document.getElementById('qualities__immunity__types__text-2');
+let immnunityType3 = document.getElementById('qualities__immunity__types__type-3');
+let immnunityText3 = document.getElementById('qualities__immunity__types__text-3');
