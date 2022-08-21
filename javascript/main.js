@@ -25,7 +25,7 @@ window.onkeyup = (key) => {
 };
 
 let hiddenArrow = (id) => {
-    if(window.outerWidth > 390){
+    if(window.outerWidth > 425){
         if(id > 1 && id < 905){
             mainContainer.style.gridTemplateColumns = '1fr 3fr 4fr 1fr';
             arrowLeft.style.display = 'grid';
