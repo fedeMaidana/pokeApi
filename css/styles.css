@@ -10,6 +10,13 @@ body{
     background-color: rgb(103, 115, 161);
     font-family: 'Times New Roman', Times, serif;
 }
+body::-webkit-scrollbar{
+    width: 8px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: rgb(190, 197, 227);
+    border-radius: 5px;
+}
 .main-title{
     color: rgb(86, 97, 139);
     font-size: 10rem;
@@ -21,6 +28,9 @@ body{
     display: grid;
     grid-template-columns: 1fr 3fr 4fr 1fr;
     justify-items: center;
+}
+.mobile__arrow__container{
+    display: none;
 }
 .arrow{
     align-self: center;
@@ -84,7 +94,6 @@ body{
     background-color: rgb(95, 167, 196);
     border-radius: 10px;
     display: inherit;
-    height: 20vh;
     margin: 0 0 0 20px;
     padding: 0 20px 0 20px;
 }
@@ -98,8 +107,8 @@ body{
     border-radius: 10px;
     display: inherit;
     grid-area: 1 / 2 / 3 / 4;
-    grid-template: 1fr 1fr 1fr / 1fr 1fr;
-    height: 48vh;
+    grid-template: repeat(4, 1fr) / 1fr 1fr;
+    height: 65.5vh;
     justify-items: center;
     margin: 0 20px 20px 0;
     padding: 10px;
@@ -151,6 +160,9 @@ body{
 }
 .pokemon-information__skills-container__result-container__text{
     cursor: pointer;
+}
+.pokemon-information__hidden-ability-container{
+    grid-area: 4 / 1 / 5 / 4;
 }
 .qualities{
     background-color: rgb(36, 38, 39);

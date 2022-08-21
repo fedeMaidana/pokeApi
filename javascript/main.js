@@ -7,10 +7,10 @@ var keys = {
     RIGHT: 39
 };
 
-//console.log(key.keyCode)
-
 document.getElementById('arrow-left').onclick = () => {poke(randomN -= 1)};
 document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
+document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1)};
+document.getElementById('mobile__arrow-right').onclick = () =>{poke(randomN += 1)};
 
 window.onkeyup = (key) => {
     try{
@@ -24,6 +24,26 @@ window.onkeyup = (key) => {
     }
 };
 
+let hiddenArrow = (id) => {
+    if(window.outerWidth > 390){
+        if(id > 1 && id < 905){
+            mainContainer.style.gridTemplateColumns = '1fr 3fr 4fr 1fr';
+            arrowLeft.style.display = 'grid';
+        }else if(id == 1){
+            mainContainer.style.gridTemplateColumns = '4fr 4fr 1fr';
+            arrowLeft.style.display = 'none';
+        }
+
+        if(id < 905 && id > 1){
+            mainContainer.style.gridTemplateColumns = '1fr 3fr 4fr 1fr';
+            arrowRight.style.display = 'grid';
+        }else if(id == 905){
+            mainContainer.style.gridTemplateColumns = '1fr 3fr 4fr';
+            arrowRight.style.display = 'none';
+        }
+    }
+}
+
 let poke = async (id) => {
     /*let response = await fetch(URL_POKE(id));
     let data = await response.json();*/
@@ -31,6 +51,7 @@ let poke = async (id) => {
     try{
         let {data} = await api(`/pokemon/${id}/`);
 
+        hiddenArrow(data.id);
         pokeName(data.id);
         pokeImage(data.id);
         pokeType(data.id);
@@ -41,6 +62,7 @@ let poke = async (id) => {
         pokeSex(data.name);
         pokeCategory(data.id);
         pokeAbility(data.id);
+        pokeHiddenAbility(data.id);
         pokeEndurance(data.id);
         pokeWeakness(data.id);
         pokeImmunity(data.id);
@@ -128,12 +150,12 @@ let pokeGraph = async (id) => {
             type: 'radar',
             data: {
                 labels: [
-                    `Salud ${data.stats[0].base_stat}`,
-                    `Ataque ${data.stats[1].base_stat}`,
-                    `At. Esp. ${data.stats[3].base_stat}`,
-                    `Velocidad ${data.stats[5].base_stat}`,
-                    `Def. Esp. ${data.stats[4].base_stat}`,
-                    `Defensa ${data.stats[2].base_stat}`
+                    `Salud (${data.stats[0].base_stat})`,
+                    `Ataque (${data.stats[1].base_stat})`,
+                    `At. Esp. (${data.stats[3].base_stat})`,
+                    `Velocidad (${data.stats[5].base_stat})`,
+                    `Def. Esp. (${data.stats[4].base_stat})`,
+                    `Defensa (${data.stats[2].base_stat})`
                 ],
                 datasets: [{
                     data: [
@@ -345,16 +367,62 @@ let pokeAbility = async (id) => {
             ability.style.gridTemplateColumns = '1fr 1fr';
             pokeAbility1.style.display = 'grid';
             pokeAbility2.style.display = 'grid';
-            abilityClass.style.width = '33vw';
+            abilityClass.style.width = '35vw';
             pokeAbility1.innerHTML = dataUrl1.data.names[indexUrl1].name;
             pokeAbility2.innerHTML = dataUrl2.data.names[indexUrl2].name;
         }else if(url.length == 1){
             ability.style.gridTemplateColumns = '1fr';
             pokeAbility1.style.display = 'grid';
             pokeAbility2.style.display = 'none';
-            abilityClass.style.width = '20vw';
+            abilityClass.style.width = '25vw';
             pokeAbility1.innerHTML = dataUrl1.data.names[indexUrl1].name;
         }
+
+        if(window.outerWidth <= 390 && url.length == 1){
+            abilityClass.style.width = '35vw';
+        }else if(window.outerWidth <= 390 && url.length == 2){
+            abilityClass.style.width = '55vw';
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+let pokeHiddenAbility = async (id) => {
+    try{
+        let {data} = await api(`/pokemon/${id}/`);
+
+        let hiddenAbility, url, dataUrl, indexUrl;
+
+        data.abilities.forEach(async(element, i) => {
+            if(data.abilities[i].is_hidden === true){
+                hiddenAbility = data.abilities[i].ability.name;
+                url = data.abilities[i].ability.url;
+            }
+        });
+
+        if(url != undefined){
+            dataUrl = await axios.get(url);
+
+            indexUrl = dataUrl.data.names.findIndex(info => info.language.name === 'es');
+        }
+
+            if(hiddenAbility == undefined){
+                hiddenAbilities.style.gridTemplateColumns = '1fr';
+                hiddenAbilityTextNone.style.display = 'grid';
+                hiddenAbilityText.style.display = 'none';
+                hiddenAbilityTextNone.innerHTML = 'n/a';
+            }else{
+                hiddenAbilities.style.gridTemplateColumns = '1fr';
+                hiddenAbilityTextNone.style.display = 'none';
+                hiddenAbilityText.style.display = 'grid';
+                hiddenAbilityText.innerHTML = dataUrl.data.names[indexUrl].name;
+            }
+
+            if(window.outerWidth <= 390){
+                hiddenAbilityContainer.style.width = '45vw';
+            }
     }catch(error){
         console.log(error);
     }
@@ -1282,7 +1350,7 @@ let pokeImmunity = async (id) => {
 
 let pokeRandom = () => {
     try{
-        return randomNumber = Math.floor((Math.random() * (898 - 1 + 1)) + 1);
+        return randomNumber = Math.floor((Math.random() * (905 - 1 + 1)) + 1);
     }catch(error){
         console.log(error);
     }

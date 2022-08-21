@@ -10,13 +10,21 @@
         <meta name="author" content="Federico Maidana"/>
         <meta name="copyright" content="Federico Maidana"/>
         <link rel="stylesheet" href="../css/styles.css"/>
+        <link rel="stylesheet" href="../css/mobile-styles.css"/>
         <title>PokeApi - Pokemon</title>
     </head>
     <body>
-        <h1 class="main-title"></h1>
+        <div class="main-title-container">
+            <h1 class="main-title"></h1>
+        </div>
 
-        <section class="main-container">
+        <section class="main-container" id="main-container">
             <img src="../icons/arrow.png" class="arrow" id="arrow-left" alt="flecha izquierda"/>
+
+            <div class="mobile__arrow__container">
+                <img src="../icons/arrow.png" class="mobile__arrow" id="mobile__arrow-left" alt="flecha izquierda"/>
+                <img src="../icons/arrow.png" class="mobile__arrow mobile__arrow-right" id="mobile__arrow-right" alt="flecha derecha"/>
+            </div>
 
             <div class="pokemon">
                 <img class="pokemon__img" id="pokemon__img"/>
@@ -73,6 +81,14 @@
                     <span class="pokemon-information__skills-container__result-container" id="skills">
                         <p class="pokemon-information__container__result pokemon-information__skills-container__result-container__text" id="ability1"></p>
                         <p class="pokemon-information__container__result pokemon-information__skills-container__result-container__text" id="ability2"></p>
+                    </span>
+                </div>
+
+                <div class="pokemon-information__container pokemon-information__hidden-ability-container" id="hidden-ability-container">
+                    <h4 class="pokemon-information__container__title">Habilidad Oculta <br/> </h4>
+                    <span class="pokemon-information__hidden-ability__result-container" id="hidden-abilities">
+                        <p class="pokemon-information__container__result pokemon-information__hidden-ability__result-container__text" id="hidden-ability__text-none"></p>
+                        <p class="pokemon-information__container__result pokemon-information__hidden-ability__result-container__text" id="hidden-ability__text"></p>
                     </span>
                 </div>
             </div>

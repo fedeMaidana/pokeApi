@@ -1,5 +1,11 @@
 let h1 = document.querySelector('h1');
 
+let mainContainer = document.getElementById('main-container');
+let mobileArrowLeft = document.getElementById('mobile__arrow-left');
+let mobileArrowRight = document.getElementById('mobile__arrow-right');
+let arrowLeft = document.getElementById('arrow-left');
+let arrowRight = document.getElementById('arrow-right');
+
 let img = document.getElementById('pokemon__img');
 
 let pokemonTypes = document.getElementById('pokemon__types');
@@ -28,6 +34,11 @@ let abilityClass = document.getElementById('skills-container');
 let ability = document.getElementById('skills');
 let pokeAbility1 = document.getElementById('ability1');
 let pokeAbility2 = document.getElementById('ability2');
+
+let hiddenAbilityContainer = document.getElementById('hidden-ability-container');
+let hiddenAbilities = document.getElementById('hidden-abilities');
+let hiddenAbilityTextNone = document.getElementById('hidden-ability__text-none');
+let hiddenAbilityText = document.getElementById('hidden-ability__text');
 
 let enduranceContainer = document.getElementById('qualities__endurance');
 let typesContainer = document.getElementById('qualities__endurance__types');
@@ -81,3 +92,4 @@ let immnunityType2 = document.getElementById('qualities__immunity__types__type-2
 let immnunityText2 = document.getElementById('qualities__immunity__types__text-2');
 let immnunityType3 = document.getElementById('qualities__immunity__types__type-3');
 let immnunityText3 = document.getElementById('qualities__immunity__types__text-3');
+
