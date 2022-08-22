@@ -421,7 +421,7 @@ let pokeHiddenAbility = async (id) => {
             }
 
             if(window.outerWidth <= 425){
-                hiddenAbilityContainer.style.width = '40vw';
+                hiddenAbilityContainer.style.width = '60vw';
             }
     }catch(error){
         console.log(error);
