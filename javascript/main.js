@@ -379,9 +379,9 @@ let pokeAbility = async (id) => {
         }
 
         if(window.outerWidth <= 390 && url.length == 1){
-            abilityClass.style.width = '35vw';
+            abilityClass.style.width = '40vw';
         }else if(window.outerWidth <= 390 && url.length == 2){
-            abilityClass.style.width = '55vw';
+            abilityClass.style.width = '60vw';
         }
 
     }catch(error){
@@ -421,7 +421,7 @@ let pokeHiddenAbility = async (id) => {
             }
 
             if(window.outerWidth <= 390){
-                hiddenAbilityContainer.style.width = '45vw';
+                hiddenAbilityContainer.style.width = '60vw';
             }
     }catch(error){
         console.log(error);
