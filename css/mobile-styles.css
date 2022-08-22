@@ -51,7 +51,7 @@
         margin: 0 5vw 0 5vw;
     }
     .pokemon-information__container{
-        width: 30vw;
+        width: 35vw;
     }
     .qualities{
         grid-template: 1fr 1fr 1fr / 1fr;
