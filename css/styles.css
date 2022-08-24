@@ -27,8 +27,9 @@ body::-webkit-scrollbar-thumb:active{
     position: relative;
     display: grid;
     margin: 0 auto;
+    margin-bottom: 20px;
     grid-template: 1fr / 1fr 1fr;
-    width: 25vw;
+    width: 30vw;
     height: 50px;
     background-color: rgb(59, 66, 94);
     align-items: center;
@@ -38,13 +39,15 @@ body::-webkit-scrollbar-thumb:active{
     border-bottom-right-radius: 10px;
 }
 .main-search__input{
-    width: 250px;
-    height: 25px;
+    width: 23vw;
+    height: 30px;
     border-radius: 5px;
     padding: 5px;
+    font-size: 1.4rem;
+    border: none;
 }
 .main-search__button{
-    height: 25px;
+    height: 30px;
     width: 50px;
     cursor: pointer;
     border-radius: 5px;

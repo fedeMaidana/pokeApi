@@ -19,7 +19,7 @@ buttonSearch.onclick = () => {pokeSearch()};
 
 inputSearch.onkeyup = (key) => {
     if(key.code == 'Enter'){
-        if(inputSearch.value != '' || inputSearch != undefined){
+        if(inputSearch.value != ''){
             pokeSearch();
         }
     }
@@ -77,12 +77,6 @@ async function pokeSearch (){
         });
 
         let {data: dataUrl} = await axios.get(url);
-
-        /*let searchName = location.search.split('?');
-
-        if(inputSearch.value != searchName){
-            location.search = inputSearch.value;
-        }*/
 
         if(inputSearch.value == dataUrl.name){
             poke(randomN = dataUrl.id);

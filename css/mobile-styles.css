@@ -1,4 +1,10 @@
 @media (max-width: 425px) {
+    .main-search-container{
+        width: 65vw;
+    }
+    .main-search__input{
+        width: 45vw;
+    }
     .main-title-container{
         width: 100%;
     }
