@@ -1,8 +1,11 @@
 const api = axios.create({baseURL: 'https://pokeapi.co/api/v2'});
 
-let pokeChart, randomN;
+let pokeChart, randomN = pokeRandom(), num = 1;
+
+//inputSearch.value = '';
 
 var keys = {
+    ENTER: 13,
     LEFT: 37,
     RIGHT: 39
 };
@@ -10,7 +13,17 @@ var keys = {
 document.getElementById('arrow-left').onclick = () => {poke(randomN -= 1)};
 document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
 document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1)};
-document.getElementById('mobile__arrow-right').onclick = () =>{poke(randomN += 1)};
+document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
+
+buttonSearch.onclick = () => {pokeSearch()};
+
+inputSearch.onkeyup = (key) => {
+    if(key.code == 'Enter'){
+        if(inputSearch.value != '' || inputSearch != undefined){
+            pokeSearch();
+        }
+    }
+}
 
 window.onkeyup = (key) => {
     try{
@@ -22,7 +35,63 @@ window.onkeyup = (key) => {
     }catch(error){
         console.log(error)
     }
-};
+}
+
+let poke = async (id) => {
+    /*let response = await fetch(URL_POKE(id));
+    let data = await response.json();*/
+
+    try{
+        let {data} = await api(`/pokemon/${id}/`);
+
+        location.hash = data.name;
+        hiddenArrow(data.id);
+        pokeName(data.id);
+        pokeImage(data.id);
+        pokeType(data.id);
+        pokeGraph(data.id);
+        pokeDescription(data.id);
+        pokeHeight(data.id);
+        pokeWeight(data.id);
+        pokeSex(data.name);
+        pokeCategory(data.id);
+        pokeAbility(data.id);
+        pokeHiddenAbility(data.id);
+        pokeEndurance(data.id);
+        pokeWeakness(data.id);
+        pokeImmunity(data.id);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+async function pokeSearch (){
+    try{
+        let {data: dataName} = await api(`/pokemon/?limit=1154`);
+        let url;
+
+        dataName.results.forEach(element => {
+            if(element.name === inputSearch.value){
+                url = element.url;
+            }
+        });
+
+        let {data: dataUrl} = await axios.get(url);
+
+        /*let searchName = location.search.split('?');
+
+        if(inputSearch.value != searchName){
+            location.search = inputSearch.value;
+        }*/
+
+        if(inputSearch.value == dataUrl.name){
+            poke(randomN = dataUrl.id);
+            inputSearch.value = '';
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
 
 let hiddenArrow = (id) => {
     if(window.outerWidth > 425){
@@ -41,33 +110,6 @@ let hiddenArrow = (id) => {
             mainContainer.style.gridTemplateColumns = '1fr 3fr 4fr';
             arrowRight.style.display = 'none';
         }
-    }
-}
-
-let poke = async (id) => {
-    /*let response = await fetch(URL_POKE(id));
-    let data = await response.json();*/
-
-    try{
-        let {data} = await api(`/pokemon/${id}/`);
-
-        hiddenArrow(data.id);
-        pokeName(data.id);
-        pokeImage(data.id);
-        pokeType(data.id);
-        pokeGraph(data.id);
-        pokeDescription(data.id);
-        pokeHeight(data.id);
-        pokeWeight(data.id);
-        pokeSex(data.name);
-        pokeCategory(data.id);
-        pokeAbility(data.id);
-        pokeHiddenAbility(data.id);
-        pokeEndurance(data.id);
-        pokeWeakness(data.id);
-        pokeImmunity(data.id);
-    }catch(error){
-        console.log(error);
     }
 }
 
@@ -1348,7 +1390,7 @@ let pokeImmunity = async (id) => {
     }
 }
 
-let pokeRandom = () => {
+function pokeRandom (){
     try{
         return randomNumber = Math.floor((Math.random() * (905 - 1 + 1)) + 1);
     }catch(error){
@@ -1356,4 +1398,7 @@ let pokeRandom = () => {
     }
 }
 
-poke(randomN = pokeRandom());
+if(inputSearch.value == '' && num == 1){
+    num = 2;
+    poke(randomN);
+}

@@ -1,3 +1,6 @@
+let inputSearch = document.getElementById('name');
+let buttonSearch = document.getElementById('poke-name-button');
+
 let h1 = document.querySelector('h1');
 
 let mainContainer = document.getElementById('main-container');
