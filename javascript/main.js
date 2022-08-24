@@ -15,23 +15,15 @@ document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
 document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1)};
 document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
 
-buttonSearch.onclick = () => {pokeSearch()};
-document.getElementById('poke-name-button').ontouchend = () => {pokeSearch()}
+buttonSearch.addEventListener('click', pokeSearch);
 
-inputSearch.onkeyup = (key) => {
+inputSearch.addEventListener('keyup', function(key){
     if(key.code == 'Enter'){
         if(inputSearch.value != ''){
             pokeSearch();
         }
     }
-}
-document.getElementById('name').ontouchend = (key) => {
-    if(key.code == 'Enter'){
-        if(inputSearch.value != ''){
-            pokeSearch();
-        }
-    }
-}
+});
 
 window.onkeyup = (key) => {
     try{
