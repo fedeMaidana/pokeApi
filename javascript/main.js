@@ -16,8 +16,16 @@ document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1
 document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
 
 buttonSearch.onclick = () => {pokeSearch()};
+document.getElementById('poke-name-button').ontouchend = () => {pokeSearch()}
 
 inputSearch.onkeyup = (key) => {
+    if(key.code == 'Enter'){
+        if(inputSearch.value != ''){
+            pokeSearch();
+        }
+    }
+}
+document.getElementById('name').ontouchend = (key) => {
     if(key.code == 'Enter'){
         if(inputSearch.value != ''){
             pokeSearch();
