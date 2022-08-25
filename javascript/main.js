@@ -34,11 +34,14 @@ inputSearch.addEventListener('keyup', function(key){
     }
 });
 inputSearch.addEventListener('touchstart', function(key){
-    if(key.keyCode == keys.ENTER){
-        if(inputSearch.value != ''){
-            pokeSearch();
+    inputSearch.addEventListener('keyup', function(key){
+        if(key.keyCode == keys.ENTER){
+            if(inputSearch.value != ''){
+                pokeSearch();
+            }
         }
-    }
+    });
+    console.log(key);
 })
 
 window.onkeyup = (key) => {
