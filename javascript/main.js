@@ -15,8 +15,16 @@ document.getElementById('arrow-right').onclick = () =>{poke(randomN += 1)};
 document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1)};
 document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
 
-buttonSearch.addEventListener('click', pokeSearch);
-buttonSearch.addEventListener('touchend', pokeSearch);
+buttonSearch.addEventListener('click', function(){
+    if(inputSearch.value != ''){
+        pokeSearch();
+    }
+});
+buttonSearch.addEventListener('touchstart', function(){
+    if(inputSearch.value != ''){
+        pokeSearch();
+    }
+})
 
 inputSearch.addEventListener('keyup', function(key){
     if(key.keyCode == keys.ENTER){
@@ -25,13 +33,13 @@ inputSearch.addEventListener('keyup', function(key){
         }
     }
 });
-inputSearch.addEventListener('touchend', function(key){
+inputSearch.addEventListener('touchstart', function(key){
     if(key.keyCode == keys.ENTER){
         if(inputSearch.value != ''){
             pokeSearch();
         }
     }
-});
+})
 
 window.onkeyup = (key) => {
     try{
