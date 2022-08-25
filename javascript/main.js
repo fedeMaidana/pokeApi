@@ -16,8 +16,16 @@ document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1
 document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
 
 buttonSearch.addEventListener('click', pokeSearch);
+buttonSearch.addEventListener('touchend', pokeSearch);
 
 inputSearch.addEventListener('keyup', function(key){
+    if(key.keyCode == keys.ENTER){
+        if(inputSearch.value != ''){
+            pokeSearch();
+        }
+    }
+});
+inputSearch.addEventListener('touchend', function(key){
     if(key.keyCode == keys.ENTER){
         if(inputSearch.value != ''){
             pokeSearch();
