@@ -18,7 +18,7 @@ document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 
 buttonSearch.addEventListener('click', pokeSearch);
 
 inputSearch.addEventListener('keyup', function(key){
-    if(key.keyCode == key.ENTER){
+    if(key.keyCode == keys.ENTER){
         if(inputSearch.value != ''){
             pokeSearch();
         }
