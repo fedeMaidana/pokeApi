@@ -16,22 +16,14 @@ document.getElementById('mobile__arrow-left').onclick = () => {poke(randomN -= 1
 document.getElementById('mobile__arrow-right').onclick = () => {poke(randomN += 1)};
 
 buttonSearch.addEventListener('click', pokeSearch);
-buttonSearch.addEventListener('touchend', pokeSearch);
 
 inputSearch.addEventListener('keyup', function(key){
-    if(key.code == 'Enter'){
+    if(key.keyCode == key.ENTER){
         if(inputSearch.value != ''){
             pokeSearch();
         }
     }
 });
-inputSearch.addEventListener('touchend', function(key){
-    if(key.code == 'Enter'){
-        if(inputSearch.value != ''){
-            pokeSearch();
-        }
-    }
-})
 
 window.onkeyup = (key) => {
     try{
