@@ -45,6 +45,7 @@ body::-webkit-scrollbar-thumb:active{
     padding: 5px;
     font-size: 1.4rem;
     border: none;
+    text-transform:lowercase;
 }
 .main-search__button{
     height: 30px;

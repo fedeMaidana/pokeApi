@@ -2,8 +2,6 @@ const api = axios.create({baseURL: 'https://pokeapi.co/api/v2'});
 
 let pokeChart, randomN = pokeRandom(), num = 1;
 
-//inputSearch.value = '';
-
 var keys = {
     ENTER: 13,
     LEFT: 37,
@@ -20,11 +18,6 @@ buttonSearch.addEventListener('click', function(){
         pokeSearch();
     }
 });
-buttonSearch.addEventListener('touchstart', function(){
-    if(inputSearch.value != ''){
-        pokeSearch();
-    }
-})
 
 inputSearch.addEventListener('keyup', function(key){
     if(key.keyCode == keys.ENTER){
@@ -33,16 +26,6 @@ inputSearch.addEventListener('keyup', function(key){
         }
     }
 });
-inputSearch.addEventListener('touchstart', function(key){
-    inputSearch.addEventListener('keyup', function(key){
-        if(key.keyCode == keys.ENTER){
-            if(inputSearch.value != ''){
-                pokeSearch();
-            }
-        }
-    });
-    console.log(key);
-})
 
 window.onkeyup = (key) => {
     try{
@@ -89,8 +72,11 @@ async function pokeSearch (){
         let {data: dataName} = await api(`/pokemon/?limit=1154`);
         let url;
 
+        lowercaseLetter = inputSearch.value.charAt(0).toLowerCase();
+        inputSearch.value = lowercaseLetter + inputSearch.value.slice(1);
+
         dataName.results.forEach(element => {
-            if(element.name === inputSearch.value){
+            if(inputSearch.value == element.name){
                 url = element.url;
             }
         });
