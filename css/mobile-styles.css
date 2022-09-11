@@ -1,68 +1,66 @@
 @media (max-width: 425px) {
-    .main-search-container{
-        width: 65vw;
-    }
-    .main-search__input{
-        width: 45vw;
-    }
-    .main-title-container{
+    .header{
         width: 100%;
     }
-    .main-title{
+    .header__seeker{
+        width: 65vw;
+    }
+    .header__seeker__input{
+        width: 45vw;
+    }
+    .header__title{
         font-size: 2rem;
     }
-    .main-container{
+    .main{
         grid-template: 1fr 3fr 1fr / 1fr;
-        height: 80vh;
+        height: 750px;
         margin-bottom: 20px;
     }
-    .arrow{
+    .main__arrow{
         display: none;
     }
-    .mobile__arrow__container{
+    .main__mobile{
         width: 100vw;
         display: grid;
         grid-template: 1fr / 1fr 1fr;
     }
-    .mobile__arrow-left{
-        margin-left: 20px;
-    }
-    .mobile__arrow-right{
-        justify-self: end;
-        margin-right: 20px;
-    }
-    .mobile__arrow{
+    .main__mobile__arrow{
         align-self: center;
         cursor: pointer;
         height: 50px;
         width: 50px;
     }
-    .mobile__arrow-right{
+    #main__mobile__arrow--left{
+        margin-left: 20px;
+    }
+    #main__mobile__arrow--right{
+        justify-self: end;
+        margin-right: 20px;
         transform: rotate(180deg);
     }
-    .secondary-container{
+    .secondary{
         grid-template: 1fr 1fr 1fr / 1fr;
         margin-top: 0;
         height: 1190px;
         margin-bottom: 20px;
     }
-    .pokemon-description{
+    .secondary__description{
         margin: 0 5vw 0 5vw;
         padding: 0 20px 0 20px;
         height: 150px;
         width: 90vw;
     }
-    .pokemon-information{
+    .secondary__info{
         grid-area: 2 / 1 / 3 / 2;
         width: 90vw;
         height: 500px;
         margin: 0 5vw 0 5vw;
     }
-    .pokemon-information__container{
+    .secondary__info__container{
         width: 35vw;
         height: 100px;
     }
-    .qualities{
+    .secondary__qualities{
         grid-template: 1fr 1fr 1fr / 1fr;
         grid-area: 3 / 1 / 4 / 2;
         margin: 0 5vw 5vh 5vw;
@@ -72,30 +70,30 @@
     .qualities__general-container{
         width: 100%;
     }
-    .qualities__types__general-type{
+    .secondary__qualities__types--general{
         height: 30px;
         width: 75px;
     }
-    .qualities__types__general-text{
+    .secondary__qualities__types--text{
         font-size: 1.4rem;
     }
-    .qualities__endurance{
+    .secondary__qualities__endurance{
         clip-path: none;
         border-top-right-radius: 10px;
         height: 200px;
     }
-    .qualities__weakness{
+    .secondary__qualities__weakness{
         grid-area: 2 / 1 / 3 / 3;
         clip-path: none;
         border-top-right-radius: 0;
         border-top: 10px solid rgb(36, 38, 39);
         height: 200px;
     }
-    .qualities__immunity{
+    .secondary__qualities__immunity{
         grid-area: 3 / 1 / 4 / 3;
         height: 100px;
     }
-    .qualities__immunity__types{
+    .secondary__qualities__immunity__types{
         height: 50%;
         align-items: center;
     }

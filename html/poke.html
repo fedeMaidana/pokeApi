@@ -14,182 +14,181 @@
         <title>PokeApi - Pokemon</title>
     </head>
     <body>
-        <div class="main-title-container">
-            <div class="main-search-container">
+        <div class="header">
+            <div class="header__seeker">
                 <label>
-                    <input type="text" spellcheck="false" class="main-search__input" id="name" title="Busqueda"/>
+                    <input type="text" spellcheck="false" class="header__seeker__input" title="Busqueda" placeholder="Buscá por nombre"/>
                 </label>
-                <button type="button" class="main-search__button" id="poke-name-button">Buscar</button>
+                <button type="button" class="header__seeker__button">Buscar</button>
             </div>
 
-            <h1 class="main-title"></h1>
+            <h1 class="header__title"></h1>
         </div>
 
-        <section class="main-container" id="main-container">
-            <img src="../icons/arrow.png" class="arrow" id="arrow-left" alt="flecha izquierda"/>
+        <section class="main">
+            <img src="../icons/arrow.png" class="main__arrow" id="main__arrow--left" alt="flecha izquierda"/>
 
-            <div class="mobile__arrow__container">
-                <img src="../icons/arrow.png" class="mobile__arrow mobile__arrow-left" id="mobile__arrow-left" alt="flecha izquierda"/>
-                <img src="../icons/arrow.png" class="mobile__arrow mobile__arrow-right" id="mobile__arrow-right" alt="flecha derecha"/>
+            <div class="main__mobile">
+                <img src="../icons/arrow.png" class="main__mobile__arrow" id="main__mobile__arrow--left" alt="flecha izquierda"/>
+                <img src="../icons/arrow.png" class="main__mobile__arrow" id="main__mobile__arrow--right" alt="flecha derecha"/>
             </div>
 
-            <div class="pokemon">
-                <img class="pokemon__img" id="pokemon__img"/>
-                <div class="pokemon__types" id="pokemon__types">
-                    <div class="pokemon__types__type pokemon__types__type-1" id="pokemon__types__type-1">
-                        <p class="pokemon__types__text" id="pokemon__types__type-1__text"></p>
+            <div class="main__poke">
+                <img class="main__poke__img"/>
+                <div class="main__poke__types">
+                    <div class="main__poke__types__type" id="main__poke__types__type-1">
+                        <p class="main__poke__types__text" id="main__poke__types__text-1"></p>
                     </div>
-                    <div class="pokemon__types__type pokemon__types__type-2" id="pokemon__types__type-2">
-                        <p class="pokemon__types__text pokemon__types__type-2__text" id="pokemon__types__type-2__text"></p>
+                    <div class="main__poke__types__type" id="main__poke__types__type-2">
+                        <p class="main__poke__types__text" id="main__poke__types__text-2"></p>
                     </div>
                 </div>
             </div>
 
-            <div class="canvas">
+            <div class="main__canvas">
                 <canvas id="canvas__graph"></canvas>
             </div>
 
-            <img src="../icons/arrow.png" class="arrow arrow-right" id="arrow-right" alt="flecha derecha"/>
+            <img src="../icons/arrow.png" class="main__arrow" id="main__arrow--right" alt="flecha derecha"/>
         </section>
 
-        <section class="secondary-container">
-            <div class="pokemon-description">
-                <p class="pokemon-description__text" id="pokemon-description__text"></p>
+        <section class="secondary">
+            <div class="secondary__description">
+                <p class="secondary__description__text"></p>
             </div>
 
-            <div class="pokemon-information">
-                <div class="pokemon-information__container pokemon-information__height-container">
-                    <h4 class="pokemon-information__container__title">Altura <br/> </h4>
-                    <span class="pokemon-information__container__result" id="height"></span>
+            <div class="secondary__info">
+                <div class="secondary__info__container" id="secondary__info__container--height">
+                    <h4 class="secondary__info__container--title">Altura <br/> </h4>
+                    <span class="secondary__info__container--text"></span>
                 </div>
 
-                <div class="pokemon-information__container pokemon-information__weight-container">
-                    <h4 class="pokemon-information__container__title">Peso <br/> </h4>
-                    <span class="pokemon-information__container__result" id="weight"></span>
+                <div class="secondary__info__container" id="secondary__info__container--weight">
+                    <h4 class="secondary__info__container--title">Peso <br/> </h4>
+                    <span class="secondary__info__container--text"></span>
                 </div>
 
-                <div class="pokemon-information__container pokemon-information__sex-container">
-                    <h4 class="pokemon-information__container__title">Genero <br/> </h4>
-                    <span class="pokemon-information__sex-container__img-container" id="sex">
-                        <img class="pokemon-information__sex-container__img-container__img" id="icon1"/>
-                        <img class="pokemon-information__sex-container__img-container__img" id="icon2"/>
-                        <p class="pokemon-information__container__result pokemon-information__sex-container__img-container__text" id="unknown1"></p>
-                        <p class="pokemon-information__container__result pokemon-information__sex-container__img-container__text" id="unknown2"></p>
+                <div class="secondary__info__container" id="secondary__info__container--gender">
+                    <h4 class="secondary__info__container--title">Genero <br/> </h4>
+                    <span class="secondary__info__container__genders">
+                        <img class="secondary__info__container__gender--img" id="secondary__info__container__gender__male-icon"/>
+                        <img class="secondary__info__container__gender--img" id="secondary__info__container__gender__female-icon"/>
+                        <p class="secondary__info__container--text" id="secondary__info__container__gender__text--unknown1"></p>
                     </span>
                 </div>
 
-                <div class="pokemon-information__container pokemon-information__category-container">
-                    <h4 class="pokemon-information__container__title">Categoría <br/> </h4>
-                    <span class="pokemon-information__container__result" id="category"></span>
+                <div class="secondary__info__container secondary__info__container--category">
+                    <h4 class="secondary__info__container--title">Categoría <br/> </h4>
+                    <span class="secondary__info__container--text" id="secondary__info__container__category__text"></span>
                 </div>
 
-                <div class="pokemon-information__container pokemon-information__skills-container" id="skills-container">
-                    <h4 class="pokemon-information__container__title">Habilidad <br/> </h4>
-                    <span class="pokemon-information__skills-container__result-container" id="skills">
-                        <p class="pokemon-information__container__result pokemon-information__skills-container__result-container__text" id="ability1"></p>
-                        <p class="pokemon-information__container__result pokemon-information__skills-container__result-container__text" id="ability2"></p>
+                <div class="secondary__info__container secondary__info__container--skills">
+                    <h4 class="secondary__info__container--title">Habilidad <br/> </h4>
+                    <span class="secondary__info__container__skills__results">
+                        <p class="secondary__info__container--text" id="secondary__info__container__skills__results--ability-1"></p>
+                        <p class="secondary__info__container--text" id="secondary__info__container__skills__results--ability-2"></p>
                     </span>
                 </div>
 
-                <div class="pokemon-information__container pokemon-information__hidden-ability-container" id="hidden-ability-container">
-                    <h4 class="pokemon-information__container__title">Habilidad Oculta <br/> </h4>
-                    <span class="pokemon-information__hidden-ability__result-container" id="hidden-abilities">
-                        <p class="pokemon-information__container__result pokemon-information__hidden-ability__result-container__text" id="hidden-ability__text-none"></p>
-                        <p class="pokemon-information__container__result pokemon-information__hidden-ability__result-container__text" id="hidden-ability__text"></p>
+                <div class="secondary__info__container secondary__info__container--hidden-ability">
+                    <h4 class="secondary__info__container--title">Habilidad Oculta <br/> </h4>
+                    <span class="secondary__info__container__hidden-ability__results">
+                        <p class="secondary__info__container--text" id="secondary__info__container__hidden-ability__results__text-none"></p>
+                        <p class="secondary__info__container--text" id="secondary__info__container__hidden-ability__results__text"></p>
                     </span>
                 </div>
             </div>
 
-            <div class="qualities">
-                <div class="qualities__general-container qualities__endurance" id="qualities__endurance">
-                    <header class="qualities__title">
-                        <h5 class="qualities__title__text">Resistencia</h5>
+            <div class="secondary__qualities">
+                <div class="secondary__qualities__general secondary__qualities__endurance">
+                    <header class="secondary__qualities__title">
+                        <h5 class="secondary__qualities__title__text">Resistencia</h5>
                     </header>
-                    <section class="qualities__endurance__types" id="qualities__endurance__types">
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-none">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-none"></p>
+                    <section class="secondary__qualities__endurance__types">
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-none">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-none"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-1">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-1"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-1">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-1"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-2">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-2"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-2">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-2"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-3">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-3"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-3">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-3"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-4">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-4"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-4">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-4"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-5">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-5"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-5">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-5"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-6">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-6"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-6">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-6"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-7">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-7"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-7">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-7"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-8">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-8"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-8">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-8"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-9">
-                            <p class="qualities__types__general-text" id="qualities__endurance__types__text-9"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-9">
+                            <p class="secondary__qualities__types--text" id="qualities__endurance__types__text-9"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-10">
-                            <p  class="qualities__types__general-text" id="qualities__endurance__types__text-10"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-10">
+                            <p  class="secondary__qualities__types--text" id="qualities__endurance__types__text-10"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__endurance__types__type-11">
-                            <p  class="qualities__types__general-text" id="qualities__endurance__types__text-11"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__endurance__types__type-11">
+                            <p  class="secondary__qualities__types--text" id="qualities__endurance__types__text-11"></p>
                         </div>
                     </section>
                 </div>
 
-                <div class="qualities__general-container qualities__weakness">
-                    <header class="qualities__title">
-                        <h5 class="qualities__title__text">Debilidad</h5>
+                <div class="secondary__qualities__general secondary__qualities__weakness">
+                    <header class="secondary__qualities__title">
+                        <h5 class="secondary__qualities__title__text">Debilidad</h5>
                     </header>
-                    <section class="qualities__weakness__types" id="qualities__weakness__types">
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-1">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-1"></p>
+                    <section class="secondary__qualities__weakness__types">
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-1">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-1"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-2">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-2"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-2">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-2"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-3">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-3"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-3">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-3"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-4">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-4"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-4">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-4"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-5">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-5"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-5">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-5"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-6">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-6"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-6">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-6"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__weakness__types__type-7">
-                            <p class="qualities__types__general-text" id="qualities__weakness__types__text-7"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__weakness__types__type-7">
+                            <p class="secondary__qualities__types--text" id="qualities__weakness__types__text-7"></p>
                         </div>
                     </section>
                 </div>
 
-                <div class=".qualities__general-container qualities__immunity">
-                    <header class="qualities__title">
-                        <h5 class="qualities__title__text">Inmunidad</h5>
+                <div class="secondary__qualities__general secondary__qualities__immunity">
+                    <header class="secondary__qualities__title">
+                        <h5 class="secondary__qualities__title__text">Inmunidad</h5>
                     </header>
-                    <section class="qualities__immunity__types" id="qualities__immunity__types">
-                        <div class="qualities__types__general-type" id="qualities__immunity__types__type-none">
-                            <p class="qualities__types__general-text" id="qualities__immunity__types__text-none"></p>
+                    <section class="secondary__qualities__immunity__types">
+                        <div class="secondary__qualities__types--general" id="qualities__immunity__types__type-none">
+                            <p class="secondary__qualities__types--text" id="qualities__immunity__types__text-none"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__immunity__types__type-1">
-                            <p class="qualities__types__general-text" id="qualities__immunity__types__text-1"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__immunity__types__type-1">
+                            <p class="secondary__qualities__types--text" id="qualities__immunity__types__text-1"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__immunity__types__type-2">
-                            <p class="qualities__types__general-text" id="qualities__immunity__types__text-2"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__immunity__types__type-2">
+                            <p class="secondary__qualities__types--text" id="qualities__immunity__types__text-2"></p>
                         </div>
-                        <div class="qualities__types__general-type" id="qualities__immunity__types__type-3">
-                            <p class="qualities__types__general-text" id="qualities__immunity__types__text-3"></p>
+                        <div class="secondary__qualities__types--general" id="qualities__immunity__types__type-3">
+                            <p class="secondary__qualities__types--text" id="qualities__immunity__types__text-3"></p>
                         </div>
                     </section>
                 </div>
@@ -199,10 +198,14 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js" integrity="sha512-5m2r+g00HDHnhXQDbRLAfZBwPpPCaK+wPLV6lm8VQ+09ilGdHfXV7IVyKPkLOTfi4vTTUVJnz7ELs7cA87/GMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="../javascript/nexus.js"></script>
-        <script src="../javascript/functions.js"></script>
+        <script src="../javascript/support.js"></script>
         <script src="../javascript/functions-endurance.js"></script>
         <script src="../javascript/functions-weakness.js"></script>
         <script src="../javascript/functions-immunity.js"></script>
+        <script src="../javascript/api-info-geted.js"></script>
+        <script src="../javascript/details.js"></script>
         <script src="../javascript/main.js"></script>
+        <script src="../javascript/navigation.js"></script>
+        <script src="../javascript/seeker.js"></script>
     </body>
 </html>

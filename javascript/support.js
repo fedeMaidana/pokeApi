@@ -1,3 +1,9 @@
+var keys = {
+    ENTER: 13,
+    LEFT: 37,
+    RIGHT: 39
+};
+
 let pokeTypeColor = (name) => {
     let typeColor = {
         normal: 'rgba(164, 172, 175, .5)',
