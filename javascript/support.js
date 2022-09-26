@@ -34,3 +34,35 @@ let pokeTypeColor = (name) => {
 
     return color;
 }
+
+let dictionary = (name) => {
+    let nameEn;
+
+    let nameTranslator = {
+        Normal: 'normal',
+        Lucha: 'fighting',
+        Volador: 'flying',
+        Veneno: 'poison',
+        Tierra: 'ground',
+        Roca: 'rock',
+        Bicho: 'bug',
+        Fantasma: 'ghost',
+        Acero: 'steel',
+        Fuego: 'fire',
+        Agua: 'water',
+        Planta: 'grass',
+        Eléctrico: 'electric',
+        Psiquico: 'psychic',
+        Hielo: 'ice',
+        Dragon: 'dragon',
+        Hada: 'fairy'
+    }
+
+    Object.keys(nameTranslator).forEach((element, i) => {
+        if(Object.keys(nameTranslator)[i] === name){
+            nameEn = nameTranslator[name];
+        }
+    });
+
+    return nameEn;
+}

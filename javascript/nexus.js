@@ -35,12 +35,12 @@ let unknown1 = LINK('#secondary__info__container__gender__text--unknown1');
 
 let category = LINK('#secondary__info__container__category__text');
 
-let abilityClass = LINK('.secondary__info__container--skills');
+let abilityClass = LINK('#secondary__info__container--skills');
 let ability = LINK('.secondary__info__container__skills__results');
 let pokeAbility1 = LINK('#secondary__info__container__skills__results--ability-1');
 let pokeAbility2 = LINK('#secondary__info__container__skills__results--ability-2');
 
-let hiddenAbilityContainer = LINK('.secondary__info__container--hidden-ability');
+let hiddenAbilityContainer = LINK('#secondary__info__container--hidden-ability');
 let hiddenAbilities = LINK('.secondary__info__container__hidden-ability__results');
 let hiddenAbilityTextNone = LINK('#secondary__info__container__hidden-ability__results__text-none');
 let hiddenAbilityText = LINK('#secondary__info__container__hidden-ability__results__text');

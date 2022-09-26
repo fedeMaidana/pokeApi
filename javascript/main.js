@@ -28,6 +28,6 @@ let poke = async (id) => {
     }
 }
 
-if(inputSearch.value == ''){
-    poke(randomN);
-}
+/*if(inputSearch.value == ''){
+}*/
+poke(randomN);

@@ -54,11 +54,11 @@ body::-webkit-scrollbar-thumb:active{
     background-color: rgb(190, 197, 227);
 }
 .header__title{
-    color: rgb(86, 97, 139);
+    color: rgb(205, 210, 227);
     font-size: 10rem;
     margin-bottom: 30px;
     text-align: center;
-    text-shadow: -1px 0 rgb(59, 66, 94), 0 1px rgb(59, 66, 94), 1px 0 rgb(59, 66, 94), 0 -1px rgb(59, 66, 94);
+    text-shadow: -2px 0 rgb(38, 39, 44), 0 2px rgb(38, 39, 44), 2px 0 rgb(38, 39, 44), 0 -2px rgb(38, 39, 44);
 }
 .main{
     display: grid;
@@ -84,6 +84,7 @@ body::-webkit-scrollbar-thumb:active{
     justify-items: center;
 }
 .main__poke__img{
+    display: none;
     height: 250px;
     width: 250px;
 }
@@ -178,6 +179,7 @@ body::-webkit-scrollbar-thumb:active{
     justify-items: center;
 }
 .secondary__info__container__gender--img{
+    display: none;
     height: 20px;
     width: 20px;
 }
@@ -185,10 +187,10 @@ body::-webkit-scrollbar-thumb:active{
 #secondary__info__container__gender__text--unknown2{
     font-weight: 400;
 }
-.secondary__info__container--category{
+#secondary__info__container--category{
     grid-area: 2 / 2 / 3 / 3;
 }
-.secondary__info__container--skills{
+#secondary__info__container--skills{
     grid-area: 3 / 1 / 4 / 4;
 }
 .secondary__info__container__skills__results{
@@ -199,7 +201,7 @@ body::-webkit-scrollbar-thumb:active{
 #secondary__info__container__skills__results--ability-2{
     cursor: pointer;
 }
-.secondary__info__container--hidden-ability{
+#secondary__info__container--hidden-ability{
     grid-area: 4 / 1 / 5 / 4;
 }
 .secondary__qualities{
@@ -245,6 +247,7 @@ body::-webkit-scrollbar-thumb:active{
 }
 .secondary__qualities__endurance__types, .secondary__qualities__weakness__types, .secondary__qualities__immunity__types{
     display: grid;
+    align-items: center;
 }
 .secondary__qualities__types--general{
     border: 1px solid;
@@ -252,6 +255,7 @@ body::-webkit-scrollbar-thumb:active{
     display: none;
     height: 25px;
     justify-self: center;
+    align-self: center;
     width: 75px;
 }
 .secondary__qualities__types--text{
