@@ -89,29 +89,25 @@ body::-webkit-scrollbar-thumb:active{
     width: 250px;
 }
 .main__poke__types{
-    display: inherit;
-    justify-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
 }
 .main__poke__types__type{
+    display: flex;
     align-items: center;
+    justify-content: center;
     border-radius: 30px;
     height: 35px;
-    justify-items: center;
     width: 100px;
-}
-#main__poke__types__type-1{
-    display: inherit;
-}
-#pokemon__types__type-2{
-    display: none;
+    border: 1px solid rgb(0, 0, 0);
 }
 .main__poke__types__text{
     font-size: 1.6rem;
     font-weight: bold;
-}
-#pokemon__types__type-2__text{
-    display: none;
 }
 .main__canvas{
     align-items: center;
@@ -122,7 +118,7 @@ body::-webkit-scrollbar-thumb:active{
 .secondary{
     display: grid;
     gap: 20px;
-    grid-template: 1fr 2fr / 2fr 1fr 1fr;
+    grid-template: 1fr 2fr / 3fr 1fr 1fr;
     margin-top: 20px;
     height: 70vh;
 }
@@ -145,7 +141,7 @@ body::-webkit-scrollbar-thumb:active{
     display: inherit;
     grid-area: 1 / 2 / 3 / 4;
     grid-template: repeat(4, 1fr) / 1fr 1fr;
-    height: 65.5vh;
+    height: 67.8vh;
     justify-items: center;
     margin: 0 20px 20px 0;
     padding: 10px;
@@ -155,7 +151,7 @@ body::-webkit-scrollbar-thumb:active{
     background-color: rgb(119, 185, 211);
     border-radius: 10px;
     display: grid;
-    width: 20vw;
+    width: 230px;
 }
 #secondary__info__container--height{
     grid-area: 1 / 1 / 2 / 2;
@@ -195,10 +191,10 @@ body::-webkit-scrollbar-thumb:active{
 }
 .secondary__info__container__skills__results{
     column-gap: 10px;
-    display: grid;
+    display: flex;
+    justify-content: space-around;
 }
-#secondary__info__container__skills__results--ability-1,
-#secondary__info__container__skills__results--ability-2{
+.abilities{
     cursor: pointer;
 }
 #secondary__info__container--hidden-ability{
@@ -217,7 +213,8 @@ body::-webkit-scrollbar-thumb:active{
 .secondary__qualities__general{
     display: grid;
     grid-template: 1fr 4fr / 1fr;
-    height: 25vh;
+    height: 27vh;
+    padding-bottom: 5px;
 }
 .secondary__qualities__endurance{
     background-color: rgb(134, 211, 119);
@@ -246,11 +243,14 @@ body::-webkit-scrollbar-thumb:active{
     font-size: 1.8rem;
 }
 .secondary__qualities__endurance__types, .secondary__qualities__weakness__types, .secondary__qualities__immunity__types{
-    display: grid;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 .secondary__qualities__types--general{
-    border: 1px solid;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 30px;
     display: none;
     height: 25px;
@@ -259,8 +259,20 @@ body::-webkit-scrollbar-thumb:active{
     width: 75px;
 }
 .secondary__qualities__types--text{
+    display: grid;
     align-self: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
+    align-items: center;
+}
+.multiplier{
+    width: 24px;
+    height: 21px;
+    background-color: rgba(0, 0, 0, .7);
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    display: grid;
+    align-content: center;
+    font-size: 1.4rem;
 }

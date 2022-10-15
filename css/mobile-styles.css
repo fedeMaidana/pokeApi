@@ -60,6 +60,12 @@
         width: 35vw;
         height: 100px;
     }
+    #secondary__info__container--skills{
+        width: 60vw;
+    }
+    #secondary__info__container--hidden-ability{
+        width: 45vw;
+    }
     .secondary__qualities{
         grid-template: 1fr 1fr 1fr / 1fr;
         grid-area: 3 / 1 / 4 / 2;

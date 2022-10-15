@@ -35,34 +35,60 @@ let pokeTypeColor = (name) => {
     return color;
 }
 
-let dictionary = (name) => {
-    let nameEn;
+let getTypeName = async (x) => {
+    let {data} = await api(`/type/${x}`);
+    const pos = data.names.findIndex(info => info.language.name === 'es');
 
-    let nameTranslator = {
-        Normal: 'normal',
-        Lucha: 'fighting',
-        Volador: 'flying',
-        Veneno: 'poison',
-        Tierra: 'ground',
-        Roca: 'rock',
-        Bicho: 'bug',
-        Fantasma: 'ghost',
-        Acero: 'steel',
-        Fuego: 'fire',
-        Agua: 'water',
-        Planta: 'grass',
-        Eléctrico: 'electric',
-        Psiquico: 'psychic',
-        Hielo: 'ice',
-        Dragon: 'dragon',
-        Hada: 'fairy'
+    return data.names[pos].name;
+}
+
+let createTypes = (name, spanishName) => {
+    let container = document.createElement('div');
+    let text = document.createElement('p');
+
+    container.classList.add('main__poke__types__type');
+    container.style.backgroundColor = pokeTypeColor(name);
+
+    text.classList.add('main__poke__types__text');
+    text.innerHTML = spanishName;
+
+    container.append(text);
+
+    return container;
+}
+
+let createAbilities = (name) => {
+    let text = document.createElement('p');
+
+    text.classList.add('secondary__info__container--text', 'abilities');
+    text.innerHTML = name;
+
+    return text;
+}
+
+let createQualities = ({name, orgName}, value) => {
+    let container = document.createElement("div");
+    let text = document.createElement("p");
+
+    container.classList.add("secondary__qualities__types--general")
+    container.style.display = "grid";
+    container.style.width = "calc(110px - 20px)";
+
+    if(orgName == "none"){
+        container.style.backgroundColor = "rgb(0,0,0)";
+        container.style.color = "#fff";
+    }else{
+        container.style.backgroundColor = pokeTypeColor(orgName)
     }
 
-    Object.keys(nameTranslator).forEach((element, i) => {
-        if(Object.keys(nameTranslator)[i] === name){
-            nameEn = nameTranslator[name];
-        }
-    });
+    text.classList.add("secondary__qualities__types--text")
+    text.innerHTML = name;
 
-    return nameEn;
+    if(value > 1){
+        text.style.gridTemplateColumns = '2fr 1fr';
+    }
+
+    container.append(text);
+
+    return container;
 }

@@ -20,14 +20,10 @@ let poke = async (id) => {
         pokeCategory(data.id);
         pokeAbility(data.id);
         pokeHiddenAbility(data.id);
-        pokeEndurance(data.id);
-        pokeWeakness(data.id);
-        pokeImmunity(data.id);
+        pokeQualities(data.id);
     }catch(error){
         console.log(error);
     }
 }
 
-/*if(inputSearch.value == ''){
-}*/
 poke(randomN);
