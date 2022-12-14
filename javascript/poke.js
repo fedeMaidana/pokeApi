@@ -1,8 +1,8 @@
 let pokeChart;
 
-let pokeName = async (id) => {
+let pokeName = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         h1.innerHTML = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)} N.°${data.id.toString().padStart(3, 0)}`;
     }catch(error){
@@ -10,9 +10,9 @@ let pokeName = async (id) => {
     }
 }
 
-let pokeImage = async (id) => {
+let pokeImage = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         img.style.display = 'grid';
         img.src = data.sprites.other["official-artwork"].front_default;
@@ -23,14 +23,14 @@ let pokeImage = async (id) => {
 
 }
 
-let pokeType = async (id) => {
+let pokeType = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         typesContainer.innerHTML = '';
 
         for (const typed of data.types){
-            spanishName = await getTypeName(typed.type.name);
+            let spanishName = await getTypeName(typed.type.name);
 
             typesContainer.append(createTypes(typed.type.name, spanishName));
         }
@@ -40,9 +40,9 @@ let pokeType = async (id) => {
     }
 }
 
-let pokeGraph = async (id) => {
+let pokeGraph = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         if(pokeChart){
             pokeChart.destroy();
@@ -120,21 +120,39 @@ let pokeGraph = async (id) => {
     }
 }
 
-let pokeDescription = async (id) => {
+let pokeDescription = async () => {
     try{
-        let {data} = await api(`/pokemon-species/${id}/`);
+        let dataSpecies = localStorage.getItem('dataSpecies') ? JSON.parse(localStorage.getItem('dataSpecies')) : '';
 
-        let pos = data.flavor_text_entries.findIndex(info => info.language.name === 'es');
+        //let {data} = await api(`/pokemon-species/${id}/`);
 
-        description.innerHTML = data.flavor_text_entries[pos].flavor_text;
+        /*let dataSpecies;
+
+        if(!localStorage.getItem('dataSpecies')){
+            console.log('dataSpecies no esta dentro del localStorage');
+
+            dataSpecies = await api(`/pokemon-species/${id}/`).then(r => r.data);
+
+            localStorage.setItem('dataSpecies', JSON.stringify(dataSpecies));
+        }else{
+            console.log('dataSpecies esta dentro del localStorage');
+
+            dataSpecies = JSON.parse(localStorage.getItem('dataSpecies'));
+
+            localStorage.removeItem('dataSpecies');
+        }*/
+
+        let pos = dataSpecies.flavor_text_entries.findIndex(info => info.language.name === 'es');
+
+        description.innerHTML = dataSpecies.flavor_text_entries[pos].flavor_text;
     }catch(error){
         console.log(error);
     }
 }
 
-let pokeHeight = async (id) => {
+let pokeHeight = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         height.innerHTML = `${data.height / 10} m`;
     }catch(error){
@@ -142,9 +160,9 @@ let pokeHeight = async (id) => {
     }
 }
 
-let pokeWeight = async (id) => {
+let pokeWeight = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         weight.innerHTML = `${data.weight / 10} Kg`;
     }catch(error){
@@ -152,15 +170,15 @@ let pokeWeight = async (id) => {
     }
 }
 
-let pokeSex = async (name) => {
+let pokeGender = async (name) => {
     try{
-        let dataFemale = await api(`/gender/1/`);
-        let dataMale = await api(`/gender/2/`);
-        let dataGenderless = await api(`/gender/3/`);
+        let dataFemale = localStorage.getItem('dataFemale') ? JSON.parse(localStorage.getItem('dataFemale')) : '';
+        let dataMale = localStorage.getItem('dataMale') ? JSON.parse(localStorage.getItem('dataMale')) : '';
+        let dataGenderless = localStorage.getItem('dataGenderless') ? JSON.parse(localStorage.getItem('dataGenderless')) : '';
 
-        let indexFemale = dataFemale.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
-        let indexMale = dataMale.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
-        let indexGenderless = dataGenderless.data.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+        let indexFemale = dataFemale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+        let indexMale = dataMale.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
+        let indexGenderless = dataGenderless.pokemon_species_details.findIndex(info => info.pokemon_species.name === name);
 
         sex.style.gridTemplateColumns = '1fr 1fr';
 
@@ -201,13 +219,13 @@ let pokeSex = async (name) => {
     }
 }
 
-let pokeCategory = async (id) => {
+let pokeCategory = async () => {
     try{
-        let {data} = await api(`/pokemon-species/${id}/`);
+        let dataSpecies = localStorage.getItem('dataSpecies') ? JSON.parse(localStorage.getItem('dataSpecies')) : '';
 
-        let pos = data.genera.findIndex(info => info.language.name === 'es');
+        let pos = dataSpecies.genera.findIndex(info => info.language.name === 'es');
 
-        let newString, string = data.genera[pos].genus;
+        let newString, string = dataSpecies.genera[pos].genus;
 
         if(string.includes('Pokémon')){
             newString = string.slice(8);
@@ -219,9 +237,9 @@ let pokeCategory = async (id) => {
     }
 }
 
-let pokeAbility = async (id) => {
+let pokeAbility = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         abilityContainer.innerHTML = '';
 
@@ -240,34 +258,32 @@ let pokeAbility = async (id) => {
     }
 }
 
-let pokeHiddenAbility = async (id) => {
+let pokeHiddenAbility = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
-            for(const hiddenAbility of data.abilities){
-                hiddenAbilities.innerHTML = '';
+        for(const hiddenAbility of data.abilities){
+            hiddenAbilities.innerHTML = '';
 
-                if(hiddenAbility.is_hidden === true){
-                    let {data: dataUrl} = await axios.get(hiddenAbility.ability.url);
+            if(hiddenAbility.is_hidden === true){
+                let {data: dataUrl} = await axios.get(hiddenAbility.ability.url);
 
-                    //-----------------------------------------------------------------------
-                    let pos = dataUrl.names.findIndex(info => info.language.name === 'es');
-                    let spanishName = dataUrl.names[pos].name;
-                    //-----------------------------------------------------------------------
+                let pos = dataUrl.names.findIndex(info => info.language.name === 'es');
+                let spanishName = dataUrl.names[pos].name;
 
-                    hiddenAbilities.append(createAbilities(spanishName));
-                }else{
-                    hiddenAbilities.append(createAbilities('n/a'));
-                }
+                hiddenAbilities.append(createAbilities(spanishName));
+            }else{
+                hiddenAbilities.append(createAbilities('n/a'));
             }
+        }
     }catch(error){
         console.log(error);
     }
 }
 
-let pokeQualities = async (id) => {
+let pokeQualities = async () => {
     try{
-        let {data} = await api(`/pokemon/${id}/`);
+        let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : '';
 
         weaknessContainer.innerHTML = '';
         const weakness = {};
@@ -364,3 +380,44 @@ let pokeQualities = async (id) => {
         console.log(error);
     }
 }
+
+/*let evolutionaryChain = async () => {
+    let dataSpecies = localStorage.getItem('dataSpecies') ? JSON.parse(localStorage.getItem('dataSpecies')) : '';
+
+    let {data: dataChain} = await axios.get(dataSpecies.evolution_chain.url);
+
+    console.log(dataSpecies);
+    console.log(dataChain);
+
+    let pokemonChain = [], subArray1 = [], subArray2 = [];
+
+    pokemonChain.push([{name: dataChain.chain.species.name, url: dataChain.chain.species.url}]);
+
+    for(const stage1 of dataChain.chain.evolves_to){
+        pokemonChain[0][0].evolves_to = stage1.species.name;
+
+        if(Object.keys(stage1).length > 1){
+            subArray1.push({name:stage1.species.name, url: stage1.species.url,});
+        }else{
+            pokemonChain.push([{name: stage1.species.name, url: stage1.species.url}]);
+        }
+
+        for(const stage2 of stage1.evolves_to){
+            if(Object.keys(stage2).length > 1){
+                subArray2.push({name: stage2.species.name, url: stage2.species.url});
+            }else{
+                pokemonChain.push([{name: stage2.species.name,url: stage2.species.url}]);
+            }
+        }
+    }
+
+    if(subArray1.length > 0){
+        pokemonChain.push(subArray1);
+    }
+
+    if(subArray2.length > 0){
+        pokemonChain.push(subArray2);
+    }
+
+    console.log(pokemonChain);
+}*/

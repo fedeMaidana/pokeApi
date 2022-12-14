@@ -26,6 +26,8 @@ let pokeTypeColor = (name) => {
         fairy: 'rgb(253, 185, 233)'
     }
 
+    let color;
+
     Object.keys(typeColor).forEach((element, i) => {
         if(Object.keys(typeColor)[i] === name){
             color =  typeColor[name];

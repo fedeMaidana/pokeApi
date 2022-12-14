@@ -276,3 +276,11 @@ body::-webkit-scrollbar-thumb:active{
     align-content: center;
     font-size: 1.4rem;
 }
+/*.terciary{
+    width: 96.5vw;
+    height: 200px;
+    background-color: rgb(95, 167, 196);
+    display: grid;
+    border-radius: 10px;
+    margin: 10px 20px 20px 20px;
+}*/

@@ -17,7 +17,7 @@ async function pokeSearch (){
         let {data: dataName} = await api(`/pokemon/?limit=1154`);
         let url;
 
-        lowercaseLetter = inputSearch.value.charAt(0).toLowerCase();
+        let lowercaseLetter = inputSearch.value.charAt(0).toLowerCase();
         inputSearch.value = lowercaseLetter + inputSearch.value.slice(1);
 
         dataName.results.forEach(element => {

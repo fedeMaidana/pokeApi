@@ -6,21 +6,32 @@ let poke = async (id) => {
 
     try{
         let {data} = await api(`/pokemon/${id}/`);
+        let {data: dataSpecies} = await api(`/pokemon-species/${id}/`);
+        let {data: dataFemale} = await api(`/gender/1/`);
+        let {data: dataMale} = await api(`/gender/2/`);
+        let {data: dataGenderless} = await api(`/gender/3/`);
+
+        localStorage.setItem('data', JSON.stringify(data));
+        localStorage.setItem('dataSpecies', JSON.stringify(dataSpecies));
+        localStorage.setItem('dataFemale', JSON.stringify(dataFemale));
+        localStorage.setItem('dataMale', JSON.stringify(dataMale));
+        localStorage.setItem('dataGenderless', JSON.stringify(dataGenderless));
 
         location.hash = data.name;
-        hiddenArrow(data.id);
-        pokeName(data.id);
-        pokeImage(data.id);
-        pokeType(data.id);
-        pokeGraph(data.id);
-        pokeDescription(data.id);
-        pokeHeight(data.id);
-        pokeWeight(data.id);
-        pokeSex(data.name);
-        pokeCategory(data.id);
-        pokeAbility(data.id);
-        pokeHiddenAbility(data.id);
-        pokeQualities(data.id);
+        hiddenArrow();
+        pokeName();
+        pokeImage();
+        pokeType();
+        pokeGraph();
+        pokeDescription();
+        pokeHeight();
+        pokeWeight();
+        pokeGender(data.name);
+        pokeCategory();
+        pokeAbility();
+        pokeHiddenAbility();
+        pokeQualities();
+        evolutionaryChain();
     }catch(error){
         console.log(error);
     }

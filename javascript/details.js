@@ -1,4 +1,5 @@
 let randomN = pokeRandom();
+//let randomN = 60;
 
 let hiddenArrow = (id) => {
     if(window.outerWidth > 425){
@@ -22,7 +23,7 @@ let hiddenArrow = (id) => {
 
 function pokeRandom (){
     try{
-        return randomNumber = Math.floor((Math.random() * (905 - 1 + 1)) + 1);
+        return Math.floor((Math.random() * (905 - 1 + 1)) + 1);
     }catch(error){
         console.log(error);
     }
